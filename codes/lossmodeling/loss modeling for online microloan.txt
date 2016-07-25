@@ -1,0 +1,50 @@
+Introduction
+1.online p2p lending
+2.highrisk-->loss
+3.Investment
+
+√Literature Review
+1.p2p <--> Risk
+2.Loss Modeling
+a.prob
+b.reserverity
+3.existing method & our method
+
+Statistical Model
+√1.benchmark
+2.quantile model
+
+Empirical study
+√1.data
+√2.variable
+3.estimate results
+4.prediction comparison
+
+Conclusion
+
+Reference
+
+
+1d.benchmark model（周三）
+（主要是beta）
+
+2d.*literature review(周四)
+p2p（risk、or行为相关）：哪些人做了哪些工作【增长很快的商业模式——高风险的：如何控制风险
+社交网络
+不理性的竞拍bidding行为
+high risk——哪些风险性问题 研究的在线贷款风险问题
+
+*lossmodeling主要：
+方法——优缺点结论
++quantil比较【上次67篇
+
+*quantileregression哪些优点主要：?+quantilesurvival
+quantile和heterigenity【有paper
+
+【spline、qunantile异质性、
+
+3d.copy
+data  variable（周五）
+
+
+

@@ -1,0 +1,8 @@
+ods printer pdf file='C:\Users\Admin\Desktop\loan\RRinclude0\output\out_npar1way_quantile.pdf';
+ods graphics on;
+proc npar1way edf wilcoxon data=QUANTILE_PRE_NEXT plots=(wilcoxonboxplot medianplot edfplot);
+class p0;
+var quantpred;
+run;
+ods graphics off;
+ods printer pdf close;

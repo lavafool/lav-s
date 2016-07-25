@@ -1,0 +1,79 @@
+
+\begin{CJK*}{GBK}{song}
+\begin{longtable}[!h]{|ll|l|}
+\centering
+\caption{The Covariates in the Dataset}
+  \hline
+  & Variable Name & Description \\ 
+  \hline
+1 & ProsperRating & The Prosper Rating at the time the listing for \\
+& & the loan was created.  \\ 
+  2 & ListingCategory & The Category of this Listing.  \\ 
+  3 & EmploymentStatusDuration  & Duration of the employment status of the \\
+& &	borrower at the time the listing was created. \\ 
+  4 & CreditScoreRangeLower  & The lower value representing the range of  \\ 
+   &  & the borrower¡¯s credit score as provided by  \\ 
+   &  & a consumer credit rating agency in a \\
+	 &  & recent credit inquiry. \\ 
+  5 & CreditScoreRangeUpper  & The upper value representing  \\ 
+   &  & the range of the borrower¡¯s credit score as provided  \\ 
+   &  & by a consumer credit rating agency in a \\ 
+	&  & recent credit inquiry. \\
+  6 & CurrentCreditLines  & Number of current credit lines at the time the \\
+	& & listing was created. \\ 
+  7 & TotalCreditLinespast7years  & Number of total credit lines in the last 7 years\\
+	& & at the time the listing was created. \\ 
+  8 & OpenRevolvingAccounts  & Number of open revolving accounts. \\ 
+  9 & OpenRevolvingMonthlyPayment  & Number of open revolving monthly payment.  \\ 
+  10 & InquiriesLast6Months  & Number of inquiries made in the last 6 months. \\ 
+  11 & TotalInquiries  & Total number of inquiries made. \\ 
+  12 & CurrentDelinquencies  & Number of current delinquencies at the time\\
+	& & the listing was created. \\ 
+  13 & AmountDelinquent  & The monetary amount delinquent at the time\\
+	& & this listing was created. \\ 
+  14 & DelinquenciesLast7Years  & Number of delinquencies in the last 7 years\\
+	& & at the time the listing was created. \\ 
+  15 & PublicRecordsLast10Years  & Number of public records in the last 10 years\\
+   &  & at the time the listing was created. \\ 
+  16 & PublicRecordsLast12Months  & Number of public records in the last 12 months\\ 
+   &  &  at the time the listing was created. \\ 
+  17 & RevolvingCreditBalance  & The monetary amount of revolving credit  \\ 
+   &  & balance at the time this listing was created. \\ 
+  18 & BankcardUtilization  & The percentage of available revolving credit that  \\ 
+   &  & is utilized at the time this listing was created. \\ 
+  19 & AvailableBankcardCredit  & Total available credit via bank card. \\ 
+  20 & TotalTrades  & Total number of trades. \\ 
+  21 & TradesNeverDelinquentpercent  & Percent of trades never delinquent. \\ 
+  22 & TradesOpenedLast6Months  & Total number of trades opened in the last \\
+	& & 6 months. \\ 
+  23 & DebtToIncomeRatio  & The debt to income ratio of the borrower  \\ 
+   &  & at the time the listing for this loan \\
+	& & was created. This value is null if the debt to \\ 
+   &  & income ratio is not available. This value is\\
+	& &  capped at 10.01 (so any actual debt to income \\ 
+   &  &  ratio larger than 1000\% will be\\
+	& & returned as 1001\%). \\ 
+  24 & StatedMonthlyIncome  & Number of stated monthly income.  \\ 
+  25 & LoanOriginalAmount  & Number of loan original amount. \\ 
+  26 & MonthlyLoanPayment  & The monthly payment made by the borrower. \\ 
+  27 & Recommendations  & Number of recommendations for borrower. \\ 
+  28 & InvestmentFromFriendsCount  & Number of investment from friends. \\ 
+  29 & InvestmentFromFriendsAmount  & Amount of investment from friends. \\ 
+  30 & Investors  & Number of investors. \\ 
+  31 & CreditHistory & History of credit. (ListingCreationDate-\\
+	& & FirstRecordedCreditLine) \\ 
+  32 & EmploymentStatus & Employment status of the borrower at the time  \\ 
+   &  & the listing was created. \\ 
+  33 & IsBorrowerHomeowner & Specifies whether or not the member is a verified  \\ 
+   &  & Homeowner at the time the listing was created. \\ 
+  34 & CurrentlyInGroup & Specifies whether or not the member is in a group  \\ 
+   &  & at the time the listing was created. \\ 
+  35 & IncomeRange & The income range of the borrower at the time  \\ 
+    &  & the lisitng was created. \\ 
+  36 & IncomeVerifiable & Specifies whether or not the member's income \\
+	& & is a verifiable at the time the listing \\ 
+    &  &  was created. \\ 
+   \hline
+	\end{longtable}
+\end{center}
+\end{table}

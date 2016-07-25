@@ -1,0 +1,58 @@
+
+\begin{table}[!h]
+\centering
+\caption{The Covariates in the Dataset}
+\begin{tabular}{|ll|l|}
+  \hline
+ & Variable Name & Description \\ 
+  \hline
+1 & ProsperRating   &  \tabincell{l}{The Prosper Rating at the time the listing for the loan\\ was created.} \\ 
+2 & ListingCategory    &  The Category of this Listing.  \\ 
+3 & EmploymentStatusDuration    &  \tabincell{l}{Duration of the employment status of the borrower at\\ the 4 \& time the listing was created.}\\ 
+5 & CreditScoreRangeLower   &   \tabincell{l}{The lower value representing the range of the borrower's\\ credit score as provided by a consumer credit rating \\agency in a recent credit inquiry.} \\ 
+6 & CreditScoreRangeUpper   &   \tabincell{l}{The upper value representing the range of the borrower's \\
+credit score as provided by a consumer credit rating agency \\in a recent credit inquiry.} \\ 
+7 & CurrentCreditLines     &   \tabincell{l}{Number of current credit lines at the time the listing \\was 
+created. }\\ 
+8 & TotalCreditLinespast7years    &     \tabincell{l}{ Number of total credit lines in the last 7 years at 
+the time \\the listing was created. }\\ 
+9 & OpenRevolvingAccounts   &   Number of open revolving accounts. \\ 
+10 & OpenRevolvingMonthlyPayment   &    Number of open revolving monthly payment.  \\ 
+11 & InquiriesLast6Months   &  Number of inquiries made in the last 6 months. \\ 
+12 & TotalInquiries  &  Total number of inquiries made. \\ 
+13 & CurrentDelinquencies   & \tabincell{l}{ Number of current delinquencies at the time the listing\\ was 
+created. }\\ 
+14 & AmountDelinquent     &   \tabincell{l}{ The monetary amount delinquent at the time this listing\\ was 
+created.} \\ 
+15 & DelinquenciesLast7Years & \tabincell{l}{Number of delinquencies in the last 7 years at the time\\ the 
+listing was created.} \\ 
+16 & PublicRecordsLast10Years     &  \tabincell{l}{  Number of public records in the last 10 years at the 
+time\\ the listing was created.} \\ 
+17 & PublicRecordsLast12Months    &    \tabincell{l}{Number of public records in the last 12 months at the \\time the listing was created. }\\ 
+18 & RevolvingCreditBalance  & \tabincell{l}{ The monetary amount of revolving credit balance at the\\ time 
+this listing was created.} \\ 
+19 & BankcardUtilization    &  \tabincell{l}{The percentage of available revolving credit that is \\utilized at the time this listing was created. }\\ 
+20 & AvailableBankcardCredit & Total available credit via bank card. \\ 
+21 & TotalTrades    &  Total number of trades. \\ 
+22 & TradesNeverDelinquentpercent  &   Percent of trades never delinquent. \\ 
+23 & TradesOpenedLast6Months &  Total number of trades opened in the last 6 months. \\ 
+24 & DebtToIncomeRatio     &    \tabincell{l}{The debt to income ratio of the borrower at the time \\ the listing for this loan was created. This value is \\null if the debt to income ratio is not available. This \\value is capped at 10.01 (so any actual debt to income \\ratio larger than 1000\% will be returned as 1001\%).} \\ 
+25 & StatedMonthlyIncome   &   Number of stated monthly income.  \\ 
+26 & LoanOriginalAmount    &   Number of loan original amount. \\ 
+27 & MonthlyLoanPayment    &   The monthly payment made by the borrower. \\ 
+28 & Recommendations &  Number of recommendations for borrower. \\ 
+29 & InvestmentFromFriendsCount    &   Number of investment from friends. \\ 
+30 & InvestmentFromFriendsAmount    &  Amount of investment from friends. \\ 
+31 & Investors    &    Number of investors. \\ 
+32 & CreditHistory   & History of credit. (ListingCreationDate-FirstRecordedCreditLine) \\ 
+33 & EmploymentStatus & Employment status of the borrower at the time the listing was created. \\ 
+34 & IsBorrowerHomeowner   &   Specifies whether or not the member is a verified Homeowner at the time the listing was created. \\ 
+35 & CurrentlyInGroup & Specifies whether or not the member is in a group at the time the 
+listing was created. \\ 
+36 & IncomeRange    &  The income range of the borrower at the time the lisitng was created.\\ 
+37 & IncomeVerifiable & Specifies whether or not the member's income is a verifiable at the 
+time the listing was created. \\ 
+   \hline
+\end{tabular}
+\label{intr1}
+\end{table}

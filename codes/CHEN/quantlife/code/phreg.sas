@@ -1,0 +1,46 @@
+libname w 'C:\Users\Admin\Desktop\loan\Loss_Modeling\DATASET';
+proc Phreg data=w.Loan_credit_total1sample30000;
+class clu_ES
+IsBorrowerHomeowner
+CurrentlyInGroup
+IR
+IncomeVerifiable
+FirstRecordedCreditLine_num
+;
+model surv_time*defaultcensor_id(1)=ProsperRating__numeric
+ListingCategory__numeric
+EmploymentStatusDuration_num
+CreditScoreRangeLower_num
+CreditScoreRangeUpper_num
+CurrentCreditLines_num
+TotalCreditLinespast7years_num
+OpenRevolvingAccounts_num
+OpenRevolvingMonthlyPayment_num
+InquiriesLast6Months_num
+TotalInquiries_num
+CurrentDelinquencies_num
+AmountDelinquent_num
+DelinquenciesLast7Years_num
+PublicRecordsLast10Years_num
+PublicRecordsLast12Months_num
+RevolvingCreditBalance_num
+BankcardUtilization_num
+AvailableBankcardCredit_num
+TotalTrades_num
+TradesNeverDelinquentpercent_num
+TradesOpenedLast6Months_num
+DebtToIncomeRatio_num
+StatedMonthlyIncome_num
+LoanOriginalAmount_num
+MonthlyLoanPayment_num
+Recommendations_num
+InvestmentFromFriendsCount_num
+InvestmentFromFriendsAmount_num
+Investors_num
+clu_ES
+IsBorrowerHomeowner
+CurrentlyInGroup
+IR
+IncomeVerifiable
+FirstRecordedCreditLine_num/SELECTION=stepwise sle=0.2 sls=0.2
+;run;

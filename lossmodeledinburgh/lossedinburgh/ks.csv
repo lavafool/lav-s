@@ -1,0 +1,20 @@
+Parameters,Degree of freedom,Estimate,Standard error,Wald,Pr>Chi-square
+Intercept,1,-0.6191,0.2028,9.3176,0.0023
+ProsperRating__numeric,1,0.0822,0.0278,8.7423,0.0031
+ListingCategory__numeric,1,0.0304,0.00837,13.2288,0.0003
+TotalCreditLinespast7years_num,1,-0.00741,0.00193,14.6685,0.0001
+OpenRevolvingAccounts_num,1,0.0204,0.0062,10.8552,0.001
+CurrentDelinquencies_num,1,0.05,0.00787,40.3733,<.0001
+DelinquenciesLast7Years_num,1,-0.00455,0.00207,4.844,0.0277
+BankcardUtilization_num,1,-0.1905,0.0676,7.9357,0.0048
+TradesNeverDelinquentpercent_num,1,1.0671,0.1469,52.7333,<.0001
+LoanOriginalAmount_num,1,-0.00013,0.000021,40.7394,<.0001
+MonthlyLoanPayment_num,1,0.00393,0.000564,48.4785,<.0001
+Investors_num,1,-0.00129,0.000311,17.1647,<.0001
+CreditHistory_Byear,1,-0.00064,0.000269,5.6841,0.0171
+clu_ES_1ind,1,-0.7569,0.0583,168.6605,<.0001
+clu_ES_2ind,1,-0.2729,0.0592,21.2368,<.0001
+CurrentlyInGroup_Find,1,0.4666,0.0541,74.2673,<.0001
+IR_1ind,1,0.5633,0.0992,32.2163,<.0001
+IR_2ind,1,0.6123,0.0995,37.8373,<.0001
+IncomeVerifiable_Find,1,0.1991,0.0861,5.3475,0.0208

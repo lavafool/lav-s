@@ -1,0 +1,37 @@
+install.packages('quantreg')
+library(quantreg)
+setwd("C:/Users/Admin/Desktop/final")
+sample_nomiss<-read.csv('sample_nomiss.csv')
+a<-crq(Surv(LOANAGE,censor_id)~MonthlyLoanPayment1+
+       LoanOriginalAmount1+
+       CurrentDelinquencies1+
+       category_grp_1+
+       category_grp_2+
+       TotalInquiries1+
+       dum_FundingOption+
+       category_grp_3+
+       dum_IsBorrowerHomeowner+
+       GroupLeaderRewardRate1+
+       lender_Ind+
+       default_frd_histcum+
+       grp_tot_payoff_loans+
+       DebtToIncomeRatio1+
+       groupleader_Ind+
+       lendamt_frd_histcum10000+
+       grp_tot_members+
+       ttlpureborrow+
+       frd_bids_histcum+
+       num_of_friends,data=sample_nomiss, method="Por", taus=c(1:9/10)
+)
+sa <- summary(a, tau=1:9/10, R=500)
+sa
+wl<-list()
+for (i in 1:length(sa)){
+  value=sa[[i]]$coef
+  tau=sa[[i]]$tau
+  c=rbind(value,tau)
+  wl[[i]]<-list(c,i)
+}
+para<-data.frame(wl)
+write.csv(para,'para.csv')
+plot(sa)

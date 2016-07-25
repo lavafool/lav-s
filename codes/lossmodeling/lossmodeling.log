@@ -1,0 +1,30 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=latex 2014.2.12)  8 JUL 2015 11:36
+entering extended mode
+**lossmodeling.tex
+(D:\sas\lossmodeling\lossmodeling.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for loaded.
+
+! LaTeX Error: File `informs1.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.2 \usepackage
+               {secdot,lscape}
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 12 strings out of 495355
+ 233 string characters out of 3183882
+ 44842 words of memory out of 3000000
+ 3279 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 10i,0n,7p,63b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.

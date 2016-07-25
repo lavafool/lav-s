@@ -1,0 +1,3 @@
+proc surveyselect data=w.Loan_credit_total1_train method=seq n=10000
+                   seed=40070 ranuni out=w.Loan_credit_total1_train10000;
+run;

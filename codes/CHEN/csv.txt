@@ -1,0 +1,9 @@
+wl<-list()
+for (i in 1:length(sa)){
+  value=sa[[i]]$coef
+  tau=sa[[i]]$tau
+  c=rbind(value,tau)
+  wl[[i]]<-list(c,i)
+}
+para<-data.frame(wl)
+write.csv(para,'para_20_80.csv')

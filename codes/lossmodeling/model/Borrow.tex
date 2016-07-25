@@ -1,0 +1,415 @@
+\documentclass[opre,copyedit]{informs1}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{CJK}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage{secdot,lscape}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{graphicx,graphics,epsfig}
+%\usepackage{graphics,color,graphicx,epsfig,amsmath,amssymb,amsthm,amsopn}
+
+\long\def\ajm#1{{\color{black}#1}}
+\newcommand{\ignore}[1]{}
+\newcommand{\E}{\mbox{\sf E}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+\newenvironment{proof}{}{\hfill\rule{2mm}{2mm}}
+
+\theoremstyle{TH}
+%\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{supportingLemma}{Lemma}[section]
+\newtheorem{supportingProp}{Proposition}[section]
+\newtheorem{asm}[thm]{Assumption}
+\newtheorem{mydef}{Definition}
+
+%%% OPRE uses endnotes
+\usepackage{endnotes}
+\let\footnote=\endnote
+\let\enotesize=\normalsize
+\def\notesname{Endnotes}%
+\def\makeenmark{\hbox to1.275em{\theenmark.\enskip\hss}}
+\def\enoteformat{\rightskip0pt\leftskip0pt\parindent=1.275em
+\leavevmode\llap{\makeenmark}}
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+\newcommand{\beq}[1] {\begin{equation} \label{#1}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bed}{\begin{displaymath}}
+\newcommand{\eed}{\end{displaymath}}
+\newcommand{\bedd}{\bed\begin{array}{l}}
+\newcommand{\eedd}{\end{array}\eed}
+\newcommand{\nd}{\noindent}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\bean}{\begin{eqnarray*}}
+\newcommand{\eean}{\end{eqnarray*}}
+\newcommand{\dF}{\dot{F}}
+\newcommand{\dlm}{\dot{\lambda}}
+
+\newcommand{\lm}{\lambda}
+\newcommand{\nn}{\nonumber\\}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\bF}{\overline{F}}
+\newcommand{\bp}{\overline{p}}
+\newcommand{\blm}{\overline{\lm}}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\bdd}{\hspace*{-0.08in}{\bf.}\hspace*{0.05in}}
+
+\def\disp{\displaystyle}
+% In the reviewing and copyediting stage enter the manuscript number.
+\MANUSCRIPTNO{} % When the article is logged in and DOI assigned to it,
+                % this manuscript number is no longer necessary
+
+\setlength{\textwidth} {6.5in}
+\setlength{\textheight} {9.1in}
+\setlength{\oddsidemargin} {0.0in}
+\setlength{\topmargin} {0.0in}
+
+%\documentstyle[12pt]{article}
+%\setlength{\oddsidemargin}{-0.3in}
+%\setlength{\evensidemargin}{0in}
+%\setlength{\textheight}{9.5in}
+%\setlength{\textwidth}{6.8in}
+%\setlength{\topmargin}{-0.5in}
+%
+%\newtheorem{thm}{Theorem}
+%\newtheorem{prop}{Proposition}
+%\newtheorem{lem}{Lemma}
+%\newtheorem{rem}{Remark}
+%\newtheorem{cor}{Corollary}
+%\newtheorem{defn}{Definition}
+%\newtheorem{exm}{Example}
+%\newtheorem{asm}{Assumption}
+
+%\newcommand{\thmref}[1]{Theorem~{\rm \ref{#1}}}
+%\newcommand{\lemref}[1]{Lemma~{\rm \ref{#1}}}
+%\newcommand{\corref}[1]{Corollary~{\rm \ref{#1}}}
+%\newcommand{\propref}[1]{Proposition~{\rm \ref{#1}}}
+%\newcommand{\defref}[1]{Definition~{\rm \ref{#1}}}
+%\newcommand{\remref}[1]{Remark~{\rm \ref{#1}}}
+%\newcommand{\exmref}[1]{Example~{\rm \ref{#1}}}
+%\newcommand{\asmref}[1]{Assumption~{\rm \ref{#1}}}
+
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%\newcommand{\mysection}[1]{\section{#1}\setcounter{equation}{0}}
+
+
+\begin{document}
+
+\TITLE{Borrow rate analysis for online P2P lending \footnote{Corresponding author: Telephone: 86-21-65901032, Fax: 86-21-65901099,  Email: luo.sirong@mail.shufe.edu.cn}}
+
+%\ARTICLEAUTHORS{
+%\AUTHOR{Sirong Luo \hspace{1.5cm} Xiao Kong \hspace{1.5cm} Tingting Nie }
+%\AFF{School of Statistics and Management, Shanghai University of Finance and Economics \\ 777 Guoding Road, Shanghai 200433, China \\
+%\EMAIL{Luo.Sirong@mail.shufe.edu.cn} \URL{}}
+%}
+
+%\date{}
+%\HISTORY{Nov, 16, 2013}
+
+\ABSTRACT{.}
+
+\KEYWORDS{Retail Banking, Credit Risk Scoring, Survival Modeling, Regression Spline}
+
+\maketitle
+
+\vspace{-0.3in}
+\section{Introduction}
+
+.%The consumer credit has been playing more and more important roles in the economies
+
+
+%it has been placed among the top 100 papers in all of science, see \citet{Garfield1990} and especially for low signal attrition model
+
+%In the following section \ref{sec:hazard_model} and section \ref{sec:Cox_Model}, we will discuss the Logistic Regression Hazard (LRH) model and Cox model, respectively.
+\section{Literature Review}\label{sec:LR}
+
+Online P2P lending has become more and more popular recently. Some researchers even think it has a chance to disintermediate the finance market. As a convenient way for personal borrowing and lending, it bears high risk. We tried some loss modeling methods as a benchmark to investigate the relationship between default and given private and environment variables so that we can use them to predict the potential loss of an online loan. After that we hire the quantile regression modeling method as a way to measure the heterogeneity in some variables. It turns out that the quantile method gives improved results.
+
+\subsection{Online P2P Lending}\label{sec:P2P}
+
+The two largest peer-to-peer (P2P) lending platforms, Prosper and Lending Club founded in 2005 and 2006 respectively, have originated over \$6 Billion in loans to date. There's two main parts has been given most attention to: whether the electronic credit marketplace will lead to disintermediation by replacing financial institutions as the traditional intermediary, and to what extent it relies on social networks. \citet{Hulme2006} studied one of the top 10 sites of P2P lending-Zopa and point out that social lending schemes as a newly emerging type of financial relationship will contribute to the disintermediation of financial markets by rivaling traditional financial services and challenging the traditional banking model. \citet{Herzenstein2008} paid attention to compare the impact of demographic attributes, borrowers’ financial strength and their effort indicator on the likelihood of funding success and found the first aspect less effective. \citet{Collier2010} focused on the community reputation systems while \citet{Duarte2012} studied the relationship between the appearance and trustworthiness of borrowers, and how it impacts the probability of funding in online P2P lending. \citet{BellottiC2012} tried classical parametric and nonparametric methods to investigate the credit cards data sets, and they found the inclusion of macroeconomic variables (MV) is important. \citet{Ghasemkhani2013} provided a research on the impact of reputation and friendship networks on electronic credit market outcomes and empirically show that using such non-credit-related information can help mitigate the concern that the disintermediation of the financial market driven by information technology might cause a loss of soft information and suffer from the adverse selection problem. \citet{Leow2014} also did some work about MVs in UK retail lending data sets. \citet{BellottiCrook2013a} included both the behavioral data about credit card holders and macroeconomic conditions across the credit card lifetime to the model and proved them statistically significant as well as gave a stress test to the model. Our model focused on the similar parts to \citet{BellottiCrook2013a} but adopted a quantile regression to investigate the heterogeneity of given variables.
+
+\subsection{Loss Modeling}\label{sec:LM}
+
+Lots of investigation has been made on loss modeling during past decade. There's both parametric and nonparametric way to model the loss given default (LGD). Some of them studied loss modeling on mortgages, while others studied credit cards, bank retail lending and so on. \citet{Qi2009} showed that loss given default can largely be explained by currently-loan-to-value (CLTV) ratio in data of high LTV residential mortgages. \citet{Bastos2010} evaluates the ability of a parametric fractional response regression and a nonparametric regression tree model in forecasting. And it measures the superiority by the out-of-sample test's root mean squared error (RMSE) the same way as in \citet{Chava2011} which is hired in our work later. \citet{Chava2011} also hired a multiplicative frailty model to investigate the impact of some uncertain infactors. In \citet{Calabrese2010}, a nonparametric beta kernels estimator is adopted to analyze the recovery rate (RR) on bank loans. The mixed random variable is useful for RR since it has a truncated distribution which falls on 0 frequently. \citet{Qi2011} compared six modeling methods for LGD and found that performance of transformation methods (inverse Gaussion and beta transformation) is very sensitive to $\Epsilon$ (A adjustment made to LGDs of 0 or 1). This gives us the idea of fitting a two-stage model, i.e., first fit a logit or binary quantile regression model, then fit transformation methods for data in the interval $(0,1)$. \citet{Leow2014b} studied time-varying covariates and tried state space modeling. And in \citet{Tong2013}, a zero-adjusted gamma model is shown to present an alternative and competitive approach to LGD modelling. \citet{Yao2015} recently proposed a support vector regression (SVR) method to model LDG and proved it superior to other classic methods significantly at an aggregated level and in some aspects at a segmented level. There's also other methods such as spline based or Bayesian based modeling. However, these parametric or nonparametric methods can't show the heterogeneity in data sets of online P2P lending because of the fixed coefficients. Thus the forecast may not be that robust in theory. Next, we make an introduction to the quantile method.
+
+
+\subsection{Quantile Regression Method}\label{sec:Q_Method}
+
+We use quantile method twice in our work: First  we use binary quantile regression to model the RR data and then the censored quantile regression to model the survival time of default. We combine these two models to get a prediction of profit or loss of lenders. For classical quantile regression, it was first introduced by \citet{Koenker1978}. It estimates the conditional quantiles instead of conditional means in linear regression so that can give different coefficient which means the impact of a variable under different quantiles. This provides a way to investigate the heterogeneity of variables, thus it has been adopt in many economical and financial researches.  As for the censored quantile regression, it was first studied by \citet{Powell1984} and \citet{Powell1986} for fixed censoring, where the censoring times $C_i$ are known for all observations, even for those uncensored. The most adopted method is proposed by \citet{Portnoy2003} under the more relaxed conditional independence assumption, that is, $T_i$ and $C_i$ are independent given $x_i$. He provided a redistribution-of-mass idea and developed a novel “recursive reweighting” scheme that generalizes the Kaplan–Meier estimator. This method is also adopted in our work. There's lots of work applying the quantile method to loss and risk analysis. For example, \citet{Arias2001} hired this method to study heterogeneity in returns to education. \citet{Engle2004} used this technique to measure risk in risk management. \citet{Somers2007} used quantile regression to study the loss of secured mortgages and the profit of credit cards. \citet{Migueis2013} used quantile regression to analyze credit risk. \citet{LeowandCrook2014} proved the stability of survival model parameter estimates by using an empirical evidence over the
+credit crisis. The quantile regression model provides a novel way of capturing heterogeneous effects in the data by modeling a set of conditional quantiles, thus we choose it as our methodology. 
+
+\section{Statistical Model}\label{sec:S_Model}
+
+Many authors studied the correlation between LGD(1-RR) and the given variables. Since LGD has a truncated distribution, with a large number of cases at the extreme values 0, we first build a logit regression to predict the $p=P(RR=0\mid x)$:\bea
+log(\frac{p}{1-p})=X\beta
+\label{logit}
+\eea For $RR\in(0,1)$, most existing models are general linear models which consider distribution of RR bimodal and U-shaped so that model some fractional logit, beta distribution or probit transformations of RR. In this paper, we consider the beta distribution general linear model as a benchmark.
+
+For survival time of default, we consider the semi-parametric Cox proportional hazard model as a benchmark.
+
+The method we focused on is quantile regression. It fits both RR and survival time. In following sections we'll make some explaination. 
+
+\subsection{general linear model}\label{sec:GLM}
+
+We consider several models as combinations of different variables, modeling frameworks and data transformations.\\
+Fractional logit transformation:\bea
+T_{RR}=log(RR)-log(1-RR).
+\eea \\
+Probit transformation: \bea
+T_{RR} = \Phi^{-1}(\frac{|{i:R_i\le RR}|}{n}), \eea where $\Phi$ is the cumulative density function of the standard
+normal distribution and $R_1,…, R_n$ are observed RRs taken from the training data. \\
+Log-log transformation:\bea
+T_{RR}=log(-log(RR)).
+\eea \\
+Beta distribution transformation:\bea
+T_{RR}=\Phi^{-1}(beta(RR,\alpha,\beta,0,1)),
+\eea where $\Phi$ is the cumulative density function of the standard normal distribution and $\alpha$, $\beta$ are parameters estimated from training data using maximum
+likelihood estimation. 
+
+The Beta distribution is considerably
+appealing because it is able to model bimodal variables with a U-shaped distribution over the interval $(0,1)$. It is therefore particularly useful for RR and tends to transform RR into an approximately normal distribution. 
+
+The general linear regression is:\bea
+T_{RR}=X\beta
+\label{glr}
+\eea
+
+\subsection{Semi-Parametric Cox Proportional Hazard Model}\label{sec:Cox_Model}
+
+There's a semi-parametric model which has been widely used in modeling the censored survival data called Cox model proposed by \citet{Cox1972}. The Cox proportional hazard (CPH) model can build the relationship between survival time and the given variables without specify the distribution of survival time and model both continuous and discrete survival time. The partial likelihood method is used to obtain the parameter estimates. Next, we will provide a simple introduction on the basic model and compare it with our quantile model.
+
+
+\subsubsection{Basic Model\\}\label{sec:BasicModel} 
+  
+$T$ is a random survival time, in our paper it represent the time of default or payoff, its distribution can be defined using hazard function: \bea
+h(t)=\lim_{\delta\rightarrow 0}\{\frac{P(t\leq T<t+\delta | T \geq t)}{\delta}\}
+\label{CoxModel}
+\eea \citet{Cox1972} first introduces the proportional hazard model: \bea
+ h(t|\vec{x})=h_0(t)e^{\vec{\beta}\vec{x}}
+\eea where $h(t|\vec{x})$ is the hazard rate of that a loan is default at time $t$ under the condition of given the variables vector $\vec{x}$. $h_0(t)$is the baseline for given $\vec{x}=0$, which is a non-parametric function so that this method is defined semi-parametric. $\vec{\beta}$ is the coefficients for covariates $\vec{x}$, which can be estimate by partial likelihood method. Thus $\vec{\beta}\vec{x}$ is the parameter part of the model.  One of the advantages of this function is that the odds ratio can be shown directly given two covariates $\vec{x}_0$ and $\vec{x}_1$:\bea
+\frac{h(t|{\vec{x}}_1)}{h(t|{\vec{x}}_0)}=e^{\vec{\beta}({\vec{x}}_1-{\vec{x}}_0)} \qquad \forall \hspace{0.03in} t \geq 0 
+\eea
+
+To estimate the parameters $\vec{\beta}$, \citet{Cox1972} gives the partial likelihood method by using the rank of censored data. Assume $t_{1}<t_{2}<\cdots <t_{k}$ are $k$ ordered survival times, $R(t_{i})$ is the set of observations are at risk at time $t_{i}$, then, the partial likelihood function for the training observations can be written as:\bea
+L(\vec{\beta})=\prod_{i=1}^k \{\frac{exp(\vec{\beta}\vec{x}_{i}(t_i))} {\sum_{j \in R(t_{i})}exp(\vec{\beta}\vec{x}_{j}(t_i))}\}^{d_i}
+\label{CoxModel_TDC_LH}
+\eea
+
+But there's a problem in the fitting process to our datasets. Because the rank method assumed that there's no tie in the data. That is to say, all the survival times should be different. But for the monthly recorded default time, the ties are inevitable  because of the discreteness.  So, the exact likelihood function need include all possible rank orderings, which makes it difficult to compute, see, \citet{Stepanova2002} and \citet{Kalbfleisch1980}. To deal with this issue, some simple approximation methods have been proposed to approximate the likelihood function and obtain parameter estimations, see \citet{Breslow1974} and \citet{Efron1977}.
+
+%Define $d_i$ as the number of default events (or closed events) at time $t_i$, $R(t_{i}|d_i)$ as the all possible subsets in which $d_i$ loans are taken from $R(t_{i})$ and $R\in R(t_{i}|d_i)$ as a set in which $d_i$ loans may be default at time $t_i$. Moreover, let $s_R=\sum_{l\in R}x_l$ as the sum of covariates $\boldsymbol{x}$ in set $R$, and $s_{D_i}=\sum_{l\in D_i}\boldsymbol{x}_l$ as the sum of covariates $\boldsymbol{x}$ where $D_i$ is the set that there are $d_i$ events at time $t_{i}$. Given these definition, the approximated Cox likelihood function is written as:
+%\bea
+%L(\vec{\beta})=\prod_{i=1}^k \frac{exp(\vec{\beta}\boldsymbol{s}_{D_i})} {\sum_{R\in R(t_i|d_i)}exp(\vec{\beta}\boldsymbol{s}_R)}
+%\eea To better approximate the likelihood function, some simpler approximation methods have been developed, see \citet{Breslow1974} and \citet{Efron1977}.
+%其中，Breslow似然函数具体形式为：
+%\begin{eqnarray}
+%L_B(\boldsymbol{\beta})=\prod_{i=1}^k \frac{exp(\boldsymbol{s}_{D_i}'\boldsymbol{\beta})} {[\sum_{l\in %R(t_{(i)})}exp(\boldsymbol{x}_l'\boldsymbol{\beta})]^{d_i}}。
+%\end{eqnarray}
+%Efron似然函数具体形式为：
+%\begin{eqnarray}
+%L_E(\boldsymbol{\beta})=\prod_{i=1}^k \frac{exp(\boldsymbol{s}_{D_i}'\boldsymbol{\beta})} {\prod_{j=1}^{d_i}[\sum_{l\in %R(t_{(i)})}exp(\boldsymbol{x}_l'\boldsymbol{\beta})-\frac{j-1}{d_i}\sum_{l\in D_i}exp(\boldsymbol{x}_l'\boldsymbol{\beta})]}。
+%\end{eqnarray}
+
+In the fitting process, we use the integrated baseline hazard given by  \citet{Andersen1992}, which can be calculated using the following equation, \bea
+\bar{H}_0(t)=\sum_{t_i \le t}\frac{d_i}{\sum_{j \in R(t_{i})}exp(\vec{\beta}\vec{x}_{j}(t_i))}
+\label{CoxModel_Baseline}
+\eea Note that $\bar{H}_0(t) =\int_0^{t} h_0(u) du$ (see \citet{Andersen1992}), thus, for discrete time model, the estimates of  $h_0(t)$ can be directly obtained using equation (\ref{CoxModel_Baseline}). 
+
+\subsection{Quantile Regression Model}\label{sec:qrm}
+
+Over the past decades, quantile regression has gradually developed into a systematic statistical methodology for estimating models of conditional quantiles. Unlike the classical leastsquares regression that models the conditional mean of the response (i.e., dependent) variable, quantile regression explores how the conditional quantile of the response variable depends on its covariates. It is especially useful when the regression coefficients depend on the quantiles. By estimating a set of conditional quantiles, we can gain more insights into the relationship between the covariates and the response variable. Moreover, as a semi-parametric statistical method, quantile regression does not make any assumption regarding the distribution of the dependent variable; therefore, it can provide robust parameter estimation.
+
+\subsubsection{Traditional Quantile Regression Model\\}\label{sec:tqrm}
+
+Quantiles are order statistics of data. Consider a dataset containing observations $\{ Y_i, x_i\}$,$i=1,…,n$, where $Y_i$ is the dependent variable, and $x_i$ is a vector of the covariates. We denote the $\tau$-quantile, $0\le \tau \le 1$, of $\{Y_i\}$, by $Q_{\tau}$,$Q_{\tau}\in \{Y_i\}$, so $n\tau$ elements of $\{Y_i\}$ are lower than or equal to $Q_{\tau}$ and the remaining $n(1-\tau)$ elements are greater than $Q_{\tau}$. A linear quantile regression estimates the $\tau$-th conditional quantile $Q_{\tau}$ for a given $x_i$, i.e., 
+$Q_{\tau}(Y_i\mid x_i)$, with a linear predictor $x_i^T\beta(\tau)$ for a given different $x_i$, where $\beta(\tau)$ is a regression coefficient vector for $x_i$, and $x_i^T$ is the transpose of $x_i$. Letting $z=Y_i- x_i^T\beta(\tau)$ denote the residuals of estimation, for the $\tau$-th conditional quantile $Q_τ$,$\beta(\tau)$ can be estimated by solving the minimization problem below:\bea
+Min_{\beta(\tau)}\sum_{i=1}^n\rho_{\tau}(Y_i-x_i^T\beta(\tau)),
+\label{mini}
+\eea where the loss function $\rho_{\tau}(z)=z(\tau-I(z<0))$ measures the estimation errors of $\beta(\tau)$, and $I(.)$ is an indicator function, which is 1 if $z<0$, and 0 otherwise. Note that the loss function assigns the weight $\tau$ for a positive $z$ and the weight $1-\tau$ for negative residuals. We will use the quantile regression model to study heterogeneity in the effect of non-credit-related information on microloan metrics, such as the borrowing rate of funded listings. Specifically, for a vector of information $x$, we estimate the following model:\bea
+Q_{\tau}(Y\mid x)=\beta_0(\tau)+\beta_1(\tau)Listing+\beta_2(\tau)Member+\beta_3Friendship+\beta_4Group,
+\label{1_model}
+\eea where $Y$ can be loan-related metrics, such as the borrowing rate and net loss of funded listings. By estimating $\beta(\tau)$ for different $\tau$-quantiles, we can identify the heterogeneity in the effects of the Listing, Member, Friendship and Group variables in online P2P lending. 
+
+\subsubsection{Binary Quantile Regression Model\\}\label{sec:bqrm}
+
+The traditional quantile regression introduced in the previous section does not apply if the response variables, e.g., the probability of a listing being funded or a loan being in default, are binary. \citet{manski1975} first introduced quantile regression for the purpose of classification. For an observation $i$, the binary quantile regression model can be defined as follows:\bea
+\left\{ \begin{array}{l}
+Y_i^*=x_i^T\beta(\tau)+\epsilon_i \\
+$Y_i=1$ if $Y_i^*\ge 0$ and $Y_i=0$, otherwise.
+\end{array}\right.
+\label{brq}
+\eea where $Y_i^*$ is a continuous latent variable used to determine the value of the dependent variable $Y_i$, $\beta(\tau)$ is the unknown parameters to be estimated for the different $\tau$-quantiles, and $\epsilon_i$  is the random error with an independent, identical and unknown distribution. Thus, our quantile regression model is a semi-parametric model.
+
+To make probabilistic predictions, we use an approach similar to \citet{kordas2006}. By estimating a set of quantiles, we obtain the $\tau$-th quantile estimation of $Y_i^*$. Based on the model, the probability that $Y_i$ takes the value of 0 is the lowest quantile level for which the corresponding quantile of $Y_i^*$ is greater than or equal to zero, and the remaining probability is the probability that $Y_i$ takes the value of 1.For example, let $Q_{0.1}$ represent the estimate of $Y_i^*$ at the quantile level $\tau=0.1$. If it is the first quantile that is greater than zero, then the probability that $Y_i$ takes the value of 0 is 0.1, and the probability that $Y_i$ takes the value of 1 is 0.9.
+We will use the binary quantile regression model to estimate the probability of funding for a listing and the probability of default for a matured loan. Specifically, for a vector of information $x$, we estimate the following model:\bea
+Q_{\tau}(Y^*\mid x)=\beta_0(\tau)+\beta_1(\tau)Listing+\beta_2(\tau)Member+\beta_3Friendship+\beta_4Group,
+\label{2_model}
+\eea
+
+From (\ref{brq}) and (\ref{2_model}), we have\bea
+Probability(Y=1\mid x)=1-\tau,\eea where $\tau=\argmin_{\theta}Q_{\theta}(Y^*\mid x)>0$, $Y$ can be the status of a listing, or  a matured loan. As compared to the classical parametric binary models, e.g., Logit or Probit model, the binary quantile model can provide insight into the heterogeneous effects of the Listing, Member, Friendship and Group on the metrics of the listings or the funded loans by modeling the quantiles of the distribution of the response variable.
+
+To obtain the parameter estimation $\beta(\tau)$, we use an approach used in \citet{benoit2012}, where a Bayesian method is used to infer the posterior distribution of $\beta(\tau)$. Since the posterior distribution form is not known, the Markov Chain Monte Carlo (MCMC) method is used to sample the distribution. Conditional on $\beta(\tau)$, the posterior distribution of $Y^*$ is the truncated asymmetric Laplace distribution. The Metropolis Hastings algorithm is used to obtain the samples for a higher-dimensional $\beta(\tau)$. The resulting MCMC is used to estimate the parameters for $\beta(\tau)$. Also, the normal distribution is used as the prior. Since there is no external or historical information about the parameters, we use the default parameters for the prior distributions.
+
+Clearly, compared to traditional models, such as leastsquares regression model or the generalized linear model, where only the conditional mean is modeled, quantile regression is a powerful tool to explore the important feature of heterogeneity in the data. Next, we discuss the estimation results obtained from the quantile regression model. 
+
+\section{Empirical Study}\label{sec:Empirical}
+
+In this section, we fit the models referred above to a real P2P record data set from one of top sites Prosper. We use the beta-transformation general linear model (BGLM) and CPH as benchmarks then compare the explanation and prediction accuracy to quantile regressions (QR) respectively and integrally. To make a fair comparison, we build these models under a same data and same variables set.
+
+\subsection{Dataset}
+
+Our work is based on the publicly available data on the P2P site Prosper.com. It consists of more than 14K small loan records from 2006 to 2014. First, we randomly split the data into training set and validation set so that the model could be evaluated by some targets like RMSE. Among that, training set includes 70\% of records. The data set contains more than 70 variables.Some are loan based variables like closed date and monthly loan payment, but most of them are variables related to customer's behavior. To avoid the collinear impact, we ran a simple linear regression to test the VIF of all variables. Then we chose 36 significant variables as shown in \ref{intr1}.
+
+
+\begin{CJK*}{GBK}{song}
+\begin{longtable}[!h]{|rl|l|}
+\caption{The Covariates in the Dataset}
+	\label{intr1}
+\centering 
+\hline
+  & Variable Name & Description \\ 
+  \hline
+1 & ProsperRating & The Prosper Rating at the time the listing for the \\
+& & loan was created.  \\ 
+  2 & ListingCategory & The Category of this Listing.  \\ 
+  3 & EmploymentStatusDuration  & Duration of the employment status of the borrower \\
+& &	at the time the listing was created. \\ 
+  4 & CreditScoreRangeLower  & The lower value representing the range of the \\ 
+   &  & borrower's credit score as provided by a consumer \\ 
+   &  & credit rating agency in a recent credit inquiry.\\
+  5 & CreditScoreRangeUpper  & The upper value representing the range of the  \\ 
+   &  & borrower's credit score as provided by a consumer  \\ 
+   &  & credit rating agency in a recent credit inquiry.\\ 
+  6 & CurrentCreditLines  & Number of current credit lines at the time the \\
+	& & listing was created. \\ 
+  7 & TotalCreditLinespast7years  & Number of total credit lines in the last 7 years at \\
+	& & the time the listing was created. \\ 
+  8 & OpenRevolvingAccounts  & Number of open revolving accounts. \\ 
+  9 & OpenRevolvingMonthlyPayment  & Number of open revolving monthly payment.  \\ 
+  10 & InquiriesLast6Months  & Number of inquiries made in the last 6 months. \\ 
+  11 & TotalInquiries  & Total number of inquiries made. \\ 
+  12 & CurrentDelinquencies  & Number of current delinquencies at the time the \\
+	& & listing was created. \\ 
+  13 & AmountDelinquent  & The monetary amount delinquent at the time this \\
+	& & listing was created. \\ 
+  14 & DelinquenciesLast7Years  & Number of delinquencies in the last 7 years\\
+	& & at the time the listing was created. \\ 
+  15 & PublicRecordsLast10Years  & Number of public records in the last 10 years\\
+   &  & at the time the listing was created. \\ 
+  16 & PublicRecordsLast12Months  & Number of public records in the last 12 months\\ 
+   &  &  at the time the listing was created. \\ 
+  17 & RevolvingCreditBalance  & The monetary amount of revolving credit  \\ 
+   &  & balance at the time this listing was created. \\ 
+  18 & BankcardUtilization  & The percentage of available revolving credit that  \\ 
+   &  & is utilized at the time this listing was created. \\ 
+  19 & AvailableBankcardCredit  & Total available credit via bank card. \\ 
+  20 & TotalTrades  & Total number of trades. \\ 
+  21 & TradesNeverDelinquentpercent  & Percent of trades never delinquent. \\ 
+  22 & TradesOpenedLast6Months  & Total number of trades opened in the last 6 \\
+	& & months. \\ 
+  23 & DebtToIncomeRatio  & The debt to income ratio of the borrower at  \\ 
+   &  & the time the listing for this loan was created. \\
+	& & This value is null if the debt to income \\ 
+   &  & ratio is not available. This value is capped \\
+	& &  at 10.01 (so any actual debt to income \\ 
+   &  &  ratio larger than 1000\% will be returned \\
+	& & as 1001\%). \\ 
+  24 & StatedMonthlyIncome  & Number of stated monthly income.  \\ 
+  25 & LoanOriginalAmount  & Number of loan original amount. \\ 
+  26 & MonthlyLoanPayment  & The monthly payment made by the borrower. \\ 
+  27 & Recommendations  & Number of recommendations for borrower. \\ 
+  28 & InvestmentFromFriendsCount  & Number of investment from friends. \\ 
+  29 & InvestmentFromFriendsAmount  & Amount of investment from friends. \\ 
+  30 & Investors  & Number of investors. \\ 
+  31 & CreditHistory & History of credit. (ListingCreationDate-\\
+	& & FirstRecordedCreditLine) \\ 
+  32 & EmploymentStatus & Employment status of the borrower at the time  \\ 
+   &  & the listing was created. \\ 
+  33 & IsBorrowerHomeowner & Specifies whether or not the member is a verified  \\ 
+   &  & homeowner at the time the listing was created. \\ 
+  34 & CurrentlyInGroup & Specifies whether or not the member is in a group  \\ 
+   &  & at the time the listing was created. \\ 
+  35 & IncomeRange & The income range of the borrower at the time  \\ 
+    &  & the lisitng was created. \\ 
+  36 & IncomeVerifiable & Specifies whether or not the member's income \\
+	& & is a verifiable at the time the listing \\ 
+    &  &  was created. \\ 
+   \hline
+	\end{longtable}
+\end{CJK*}
+
+For the RR models BGLM and BQR, the dependent variable is RR, which is calculated as follow:\bea
+EAD=MonthlyPay*Term-CustomerPayments;
+\label{ead}
+\eea 
+\bea
+RR=(RecoveryPay+(GrossPrincipalLoss-NetPrincipalLoss))/EAD;
+\label{rr}
+\eea
+Where the $EAD$ is exposure at default.
+
+For the survival model CPH and censored quantile regression (CRQ), survival time $T$ is the time from the loan origination time until the default time. If the loan status isn't one of `Chargedoff', `Defaulted' and `Past Due ($>$120 days)', then the record is censored, that is to say, the default indicator $D$ is 0.
+
+
+\subsection{Statistical Estimation}
+
+\subsubsection{Default Survival Model \\} 
+
+\subsubsection{Attrition Survival Model \\} 
+
+
+
+\subsection{Prediction Performance Comparison}
+
+
+\subsubsection{Prediction Performance \\}
+
+
+
+\subsubsection{Cost Based Performance \\}
+
+
+
+\section{Summary and Future Research}\label{sec:conclusion}
+
+\section{Acknowledgement:}
+
+
+\section{Appendix: Regression Spline Function}\label{sec:Splines}
+
+\bibliographystyle{ormsv080}
+\newpage
+\bibliography{CM1129}
+
+\end{document}
+
+

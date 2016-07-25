@@ -1,0 +1,678 @@
+\documentclass[opre,copyedit]{informs1}
+\usepackage{secdot,lscape}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{graphicx,graphics,epsfig}
+%\usepackage{graphics,color,graphicx,epsfig,amsmath,amssymb,amsthm,amsopn}
+
+\long\def\ajm#1{{\color{black}#1}}
+\newcommand{\ignore}[1]{}
+\newcommand{\E}{\mbox{\sf E}}
+
+\newenvironment{proof}{}{\hfill\rule{2mm}{2mm}}
+
+\theoremstyle{TH}
+%\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{supportingLemma}{Lemma}[section]
+\newtheorem{supportingProp}{Proposition}[section]
+\newtheorem{asm}[thm]{Assumption}
+\newtheorem{mydef}{Definition}
+
+%%% OPRE uses endnotes
+\usepackage{endnotes}
+\let\footnote=\endnote
+\let\enotesize=\normalsize
+\def\notesname{Endnotes}%
+\def\makeenmark{\hbox to1.275em{\theenmark.\enskip\hss}}
+\def\enoteformat{\rightskip0pt\leftskip0pt\parindent=1.275em
+\leavevmode\llap{\makeenmark}}
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+\newcommand{\beq}[1] {\begin{equation} \label{#1}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bed}{\begin{displaymath}}
+\newcommand{\eed}{\end{displaymath}}
+\newcommand{\bedd}{\bed\begin{array}{l}}
+\newcommand{\eedd}{\end{array}\eed}
+\newcommand{\nd}{\noindent}
+
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\bean}{\begin{eqnarray*}}
+\newcommand{\eean}{\end{eqnarray*}}
+\newcommand{\dF}{\dot{F}}
+\newcommand{\dlm}{\dot{\lambda}}
+
+\newcommand{\lm}{\lambda}
+\newcommand{\nn}{\nonumber\\}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\vep}{\varepsilon}
+\newcommand{\bF}{\overline{F}}
+\newcommand{\bp}{\overline{p}}
+\newcommand{\blm}{\overline{\lm}}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\bdd}{\hspace*{-0.08in}{\bf.}\hspace*{0.05in}}
+
+\def\disp{\displaystyle}
+% In the reviewing and copyediting stage enter the manuscript number.
+\MANUSCRIPTNO{} % When the article is logged in and DOI assigned to it,
+                % this manuscript number is no longer necessary
+
+\setlength{\textwidth} {6.5in}
+\setlength{\textheight} {9.1in}
+\setlength{\oddsidemargin} {0.0in}
+\setlength{\topmargin} {0.0in}
+
+%\documentstyle[12pt]{article}
+%\setlength{\oddsidemargin}{-0.3in}
+%\setlength{\evensidemargin}{0in}
+%\setlength{\textheight}{9.5in}
+%\setlength{\textwidth}{6.8in}
+%\setlength{\topmargin}{-0.5in}
+%
+%\newtheorem{thm}{Theorem}
+%\newtheorem{prop}{Proposition}
+%\newtheorem{lem}{Lemma}
+%\newtheorem{rem}{Remark}
+%\newtheorem{cor}{Corollary}
+%\newtheorem{defn}{Definition}
+%\newtheorem{exm}{Example}
+%\newtheorem{asm}{Assumption}
+
+%\newcommand{\thmref}[1]{Theorem~{\rm \ref{#1}}}
+%\newcommand{\lemref}[1]{Lemma~{\rm \ref{#1}}}
+%\newcommand{\corref}[1]{Corollary~{\rm \ref{#1}}}
+%\newcommand{\propref}[1]{Proposition~{\rm \ref{#1}}}
+%\newcommand{\defref}[1]{Definition~{\rm \ref{#1}}}
+%\newcommand{\remref}[1]{Remark~{\rm \ref{#1}}}
+%\newcommand{\exmref}[1]{Example~{\rm \ref{#1}}}
+%\newcommand{\asmref}[1]{Assumption~{\rm \ref{#1}}}
+
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%\newcommand{\mysection}[1]{\section{#1}\setcounter{equation}{0}}
+
+\begin{document}
+
+\TITLE{Loss Modeling for Online Micro-loan \footnote{Corresponding author: Telephone: 86-21-65901032, Fax: 86-21-65901099,  Email: luo.sirong@mail.shufe.edu.cn}}
+
+%\ARTICLEAUTHORS{
+%\AUTHOR{Sirong Luo \hspace{1.5cm} Xiao Kong \hspace{1.5cm} Tingting Nie }
+%\AFF{School of Statistics and Management, Shanghai University of Finance and Economics \\ 777 Guoding Road, Shanghai 200433, China \\
+%\EMAIL{Luo.Sirong@mail.shufe.edu.cn} \URL{}}
+%}
+
+%\date{}
+%\HISTORY{Nov, 16, 2013}
+
+\ABSTRACT{.}
+
+\KEYWORDS{Retail Banking, Credit Risk Scoring, Survival Modeling, Regression Spline}
+
+\maketitle
+
+\vspace{-0.3in}
+\section{Introduction}
+
+.%The consumer credit has been playing more and more important roles in the economies
+
+
+%it has been placed among the top 100 papers in all of science, see \citet{Garfield1990} and especially for low signal attrition model
+
+%In the following section \ref{sec:hazard_model} and section \ref{sec:Cox_Model}, we will discuss the Logistic Regression Hazard (LRH) model and Cox model, respectively.
+ \section{Literature Review}\label{sec:P_Model}
+
+\subsection{p2p}\label{sec:p2p}
+\subsection{Loss Modeling}\label{sec:lm}
+\subsection{comparison of existing methods and our method}\label{sec:comparison}
+
+\section{Statistical Model}\label{sec:S_Model}
+
+Many authors studied the correlation between LGD(1-RR) and the given variables. Since LGD has a truncated distribution, with a large number of cases at the extreme values 0, we first build a logit regression to predict the $p=P(RR=0\mid x)$:\bea
+log(\frac{p}{1-p})=X\beta
+\label{logit}
+\eea For $RR\in(0,1)$, most existing models are general linear models which consider distribution of RR bimodal and U-shaped so that
+model some fractional logit, beta distribution or probit transformations of RR. In this paper, we consider the beta distribution general linear model as a benchmark.
+
+For survival time of default, we consider the semi-parametric Cox proportional hazard model as a benchmark.
+
+The method we focused on is quantile regression. It fits both RR and survival time. In following sections we'll make some explaination. 
+
+\subsection{general linear model}\label{sec:glm}
+
+We consider several models as combinations of different variables, modeling frameworks and data transformations.
+\eea Fractional logit transformation:\bea
+T_{RR}=log(RR)-log(1-RR).
+\eea Probit transformation: \bea
+T_{RR} = \Phi^{-1}(\frac{|{i:R_i\le RR}|}{n}), \eea where $\Phi$ is the cumulative density function of the standard
+normal distribution and $R_1,…, R_n$ are observed RRs taken from the training data. 
+\eea Log-log transformation:\bea
+T_{RR}=log(-log(RR)).
+\eea Beta distribution transformation:\bea
+T_{RR}=\Phi^{-1}(beta(RR,\alpha,\beta,0,1)),
+\eea where $\Phi$ is the cumulative density function of the standard normal distribution and $\alpha$, $\beta$ are parameters estimated from training data using maximum
+likelihood estimation. 
+
+The Beta distribution is considerably
+appealing because it is able to model bimodal variables with a U-shaped distribution over the interval 0–1. It is therefore particularly useful for RR and tends to transform RR into an approximately normal distribution. 
+
+The general linear regression is:\bea
+T_{RR}=X\beta
+\label{glr}
+
+\subsection{Semi-Parametric Cox Proportional Hazard Model}\label{sec:Cox_Model}
+
+There's a semi-parametric model which has been widely used in modeling the censored survival data called Cox model proposed by \citet{Cox1972}. The Cox proportional hazard (CPH) model can build the relationship between survival time and the given variables without specify the distribution of survival time and model both continuous and discrete survival time. The partial likelihood method is used to obtain the parameter estimates. Next, we will provide a simple introduction on the basic model and compare it with our quantile model.
+
+
+\subsubsection{Basic Model\\}\label{sec:BasicModel} 
+  
+$T$ is a random survival time, in our paper it represent the time of default or payoff, its distribution can be defined using hazard function: \bea
+h(t)=\lim_{\delta\rightarrow 0}\{\frac{P(t\leq T<t+\delta | T \geq t)}{\delta}\}
+\label{CoxModel}
+\eea \citet{Cox1972} first introduces the proportional hazard model: \bea
+ h(t|\vec{x})=h_0(t)e^{\vec{\beta}\vec{x}}
+\eea where $h(t|\vec{x})$ is the hazard rate of that a loan is default at time $t$ under the condition of given the variables vector $\vec{x}$. $h_0(t)$is the baseline for given $\vec{x}=0$, which is a non-parametric function so that this method is defined semi-parametric. $\vec{\beta}$ is the coefficients for covariates $\vec{x}$, which can be estimate by partial likelihood method. Thus $\vec{\beta}\vec{x}$ is the parameter part of the model.  One of the advantages of this function is that the odds ratio can be shown directly given two covariates $\vec{x}_0$ and $\vec{x}_1$:\bea
+\frac{h(t|{\vec{x}}_1)}{h(t|{\vec{x}}_0)}=e^{\vec{\beta}({\vec{x}}_1-{\vec{x}}_0)} \qquad \forall \hspace{0.03in} t \geq 0 
+\eea
+
+To estimate the parameters $\vec{\beta}$, \citet{Cox1972} gives the partial likelihood method by using the rank of censored data. Assume $t_{1}<t_{2}<\cdots <t_{k}$ are $k$ ordered survival times, $R(t_{i})$ is the set of observations are at risk at time $t_{i}$, then, the partial likelihood function for the training observations can be written as:\bea
+L(\vec{\beta})=\prod_{i=1}^k \{\frac{exp(\vec{\beta}\vec{x}_{i}(t_i))} {\sum_{j \in R(t_{i})}exp(\vec{\beta}\vec{x}_{j}(t_i))}\}^{d_i}
+\label{CoxModel_TDC_LH}
+\eea
+
+But there's a problem in the fitting process to our datasets. Because the rank method assumed that there's no tie in the data. That is to say, all the survival times should be different. But for the monthly recorded default time, the ties are inevitable  because of the discreteness.  So, the exact likelihood function need include all possible rank orderings, which makes it difficult to compute, see, \citet{Stepanova2002} and \citet{Kalbfleisch1980}. To deal with this issue, some simple approximation methods have been proposed to approximate the likelihood function and obtain parameter estimations, see \citet{Breslow1974} and \citet{Efron1977}.
+
+%Define $d_i$ as the number of default events (or closed events) at time $t_i$, $R(t_{i}|d_i)$ as the all possible subsets in which $d_i$ loans are taken from $R(t_{i})$ and $R\in R(t_{i}|d_i)$ as a set in which $d_i$ loans may be default at time $t_i$. Moreover, let $s_R=\sum_{l\in R}x_l$ as the sum of covariates $\boldsymbol{x}$ in set $R$, and $s_{D_i}=\sum_{l\in D_i}\boldsymbol{x}_l$ as the sum of covariates $\boldsymbol{x}$ where $D_i$ is the set that there are $d_i$ events at time $t_{i}$. Given these definition, the approximated Cox likelihood function is written as:
+%\bea
+%L(\vec{\beta})=\prod_{i=1}^k \frac{exp(\vec{\beta}\boldsymbol{s}_{D_i})} {\sum_{R\in R(t_i|d_i)}exp(\vec{\beta}\boldsymbol{s}_R)}
+%\eea To better approximate the likelihood function, some simpler approximation methods have been developed, see \citet{Breslow1974} and \citet{Efron1977}.
+%其中，Breslow似然函数具体形式为：
+%\begin{eqnarray}
+%L_B(\boldsymbol{\beta})=\prod_{i=1}^k \frac{exp(\boldsymbol{s}_{D_i}'\boldsymbol{\beta})} {[\sum_{l\in %R(t_{(i)})}exp(\boldsymbol{x}_l'\boldsymbol{\beta})]^{d_i}}。
+%\end{eqnarray}
+%Efron似然函数具体形式为：
+%\begin{eqnarray}
+%L_E(\boldsymbol{\beta})=\prod_{i=1}^k \frac{exp(\boldsymbol{s}_{D_i}'\boldsymbol{\beta})} {\prod_{j=1}^{d_i}[\sum_{l\in %R(t_{(i)})}exp(\boldsymbol{x}_l'\boldsymbol{\beta})-\frac{j-1}{d_i}\sum_{l\in D_i}exp(\boldsymbol{x}_l'\boldsymbol{\beta})]}。
+%\end{eqnarray}
+
+In the fitting process, we use the integrated baseline hazard given by  \citet{Andersen1992}, which can be calculated using the following equation, \bea
+\bar{H}_0(t)=\sum_{t_i \le t}\frac{d_i}{\sum_{j \in R(t_{i})}exp(\vec{\beta}\vec{x}_{j}(t_i))}
+\label{CoxModel_Baseline}
+\eea Note that $\bar{H}_0(t) =\int_0^{t} h_0(u) du$ (see \citet{Andersen1992}), thus, for discrete time model, the estimates of  $h_0(t)$ can be directly obtained using equation (\ref{CoxModel_Baseline}). 
+
+\subsection{Quantile Regression Model}\label{sec:qrm}
+
+Over the past decades, quantile regression has gradually developed into a systematic statistical methodology for estimating models of conditional quantiles. Unlike the classical leastsquares regression that models the conditional mean of the response (i.e., dependent) variable, quantile regression explores how the conditional quantile of the response variable depends on its covariates. It is especially useful when the regression coefficients depend on the quantiles. By estimating a set of conditional quantiles, we can gain more insights into the relationship between the covariates and the response variable. Moreover, as a semi-parametric statistical method, quantile regression does not make any assumption regarding the distribution of the dependent variable; therefore, it can provide robust parameter estimation.
+
+\subsubsection{Traditional Quantile Regression Model}\label{sec:tqrm}
+
+Quantiles are order statistics of data. Consider a dataset containing observations $\{ Y_i, x_i\}$,$i=1,…,n$, where $Y_i$ is the dependent variable, and $x_i$ is a vector of the covariates. We denote the $\tau$-quantile, $0\le \tau \le 1$, of $\{Y_i\}$, by $Q_{\tau}$,$Q_{\tau}\in \{Y_i\}$, so $n\tau$ elements of $\{Y_i\}$ are lower than or equal to $Q_{\tau}$ and the remaining $n(1-\tau)$ elements are greater than $Q_{\tau}$. A linear quantile regression estimates the $\tau$-th conditional quantile $Q_{\tau}$ for a given $x_i$, i.e., 
+$Q_{\tau}(Y_i\mid x_i)$, with a linear predictor $x_i^T\beta(\tau)$ for a given different $x_i$, where $\beta(\tau)$ is a regression coefficient vector for $x_i$, and $x_i^T$ is the transpose of $x_i$. Letting $z=Y_i- x_i^T\beta(\tau)$ denote the residuals of estimation, for the $\tau$-th conditional quantile $Q_τ$,$\beta(\tau)$ can be estimated by solving the minimization problem below:\bea
+Min_{\beta(\tau)}\sum_{i=1}^n\rho_{\tau}(Y_i-x_i^T\beta(\tau)),
+\label{mini}
+\eea where the loss function $\rho_{\tau}(z)=z(\tau-I(z<0))$ measures the estimation errors of $\beta(\tau)$, and $I(?)$ is an indicator function, which is 1 if $z<0$, and 0 otherwise. Note that the loss function assigns the weight $\tau$ for a positive $z$ and the weight $1-τ$ for negative residuals. We will use the quantile regression model to study heterogeneity in the effect of non-credit-related information on microloan metrics, such as the borrowing rate of funded listings. Specifically, for a vector of information $x$, we estimate the following model:\bea
+Q_{\tau}(Y\mid x)=\beta_0(\tau)+\beta_1(\tau)Listing+\beta_2(\tau)Member+\beta_3Friendship+\beta_4Group,
+\label{1_model}
+\eea where $Y$ can be loan-related metrics, such as the borrowing rate and net loss of funded listings. By estimating $\beta(\tau)$ for different $τ$-quantiles, we can identify the heterogeneity in the effects of the Listing, Member, Friendship and Group variables in online P2P lending. 
+
+\subsubsection{Binary Quantile Regression Model}\label{sec:bqrm}
+
+The traditional quantile regression introduced in the previous section does not apply if the response variables, e.g., the probability of a listing being funded or a loan being in default, are binary. \citet{manski1975} first introduced quantile regression for the purpose of classification. For an observation $i$, the binary quantile regression model can be defined as follows:\bea
+\left\{ 
+Y_i^*=x_i^T\beta(\tau)+\epsilon_i \\
+$Y_i=1$ if $Y_i^*\ge 0$ and $Y_i=0$, otherwise \right.
+\lable{bqr_model}
+\eea where $Y_i^*$ is a continuous latent variable used to determine the value of the dependent variable $Y_i$, $\beta(\tau)$ is the unknown parameters to be estimated for the different $\tau$-quantiles, and $\epsilon_i$  is the random error with an independent, identical and unknown distribution. Thus, our quantile regression model is a semi-parametric model.
+
+To make probabilistic predictions, we use an approach similar to \citet{kordas2006}. By estimating a set of quantiles, we obtain the $\tau$-th quantile estimation of $Y_i^*$. Based on the model, the probability that $Y_i$ takes the value of 0 is the lowest quantile level for which the corresponding quantile of $Y_i^*$ is greater than or equal to zero, and the remaining probability is the probability that $Y_i$ takes the value of 1.For example, let $Q_{0.1}$ represent the estimate of $Y_i^*$ at the quantile level $\tau=0.1$. If it is the first quantile that is greater than zero, then the probability that $Y_i$ takes the value of 0 is 0.1, and the probability that $Y_i$ takes the value of 1 is 0.9.
+We will use the binary quantile regression model to estimate the probability of funding for a listing and the probability of default for a matured loan. Specifically, for a vector of information $x$, we estimate the following model:\bea
+Q_{\tau}(Y^*\mid x)=\beta_0(\tau)+\beta_1(\tau)Listing+\beta_2(\tau)Member+\beta_3Friendship+\beta_4Group,
+\label{2_model}
+\eea
+
+From (\ref{brq_model}) and (\ref{2_model}), we have\bea
+Probability(Y=1\mid x)=1-\tau, where $\tau=\argmin_{\theta}Q_{\theta}(Y^*\mid x)>0$,
+\eea where Y can be the status of a listing, or  a matured loan. As compared to the classical parametric binary models, e.g., Logit or Probit model, the binary quantile model can provide insight into the heterogeneous effects of the Listing, Member, Friendship and Group on the metrics of the listings or the funded loans by modeling the quantiles of the distribution of the response variable.
+
+To obtain the parameter estimation $\beta(\tau)$, we use an approach used in \citet{benoit2012}, where a Bayesian method is used to infer the posterior distribution of $\beta(\tau)$. Since the posterior distribution form is not known, the Markov Chain Monte Carlo (MCMC) method is used to sample the distribution. Conditional on $\beta(\tau)$, the posterior distribution of $Y^*$ is the truncated asymmetric Laplace distribution. The Metropolis Hastings algorithm is used to obtain the samples for a higher-dimensional $\beta(\tau)$. The resulting MCMC is used to estimate the parameters for $\beta(\tau)$. Also, the normal distribution is used as the prior. Since there is no external or historical information about the parameters, we use the default parameters for the prior distributions.
+
+Clearly, compared to traditional models, such as leastsquares regression model or the generalized linear model, where only the conditional mean is modeled, quantile regression is a powerful tool to explore the important feature of heterogeneity in the data. Next, we discuss the estimation results obtained from the quantile regression model. 
+
+\section{Empirical Study}\label{sec:Empirical}
+
+In this section, we will use real performance data from a credit card portfolio to justify the proposed SMLRS model. Using the widely used CPH model as benchmark, we compare the performance of SMLRS model with CPH model from both explanatory and prediction perspective. To make an 'apple to apple' comparison, we use same data and same set of variables to build the two set of survival models, respectively.  
+
+\subsection{Dataset}
+
+The dataset for the numerical study is provided by a commercial bank. The sample consists of  more than 30K credit card accounts, and it has more than 20 months of monthly performance data for these accounts (we can not reveal the exact time and event rate information on the data because of commercial confidentiality). To build the survival models, we first randomly split the data into training dataset and validation dataset. The training dataset includes 70\% of accounts, and the left 30\% of accounts is in the validation dataset. In the dataset, there are 8 time-independent covariates, e.g., product related variables and customers' behavior related variables. To make more comprehensive analysis, we also add a time-dependent covariate, i.e., the market interest rate. The description of all covariates are listed in table \ref{intr1}.
+%and the descriptive statistics of the data are given in table $\ref{Description_VIF}$ in Appendix. 
+
+\begin{table}[!h]
+\centering
+\caption{The Covariates in the Dataset}
+\begin{tabular}{|ll|l|}  \hline
+   & Variable Name & Description  \\  \hline
+ 1 & Purchase\_APR & Purchasing Annual Percent Rate (APR) \\
+ 2 & Cash\_APR     & Cash Annual Percent Rate (APR) \\
+ 3 & Credit\_line  & Credit Limit \\
+ 4 & Pbad          & Credit Risk Model Score \\ 
+ 5 & Cash\_balance & Cash Balance  \\
+ 6 & Dq\_prior     & The Prior Delinquent Status \\
+ 7 & Outstanding   & Total Outstanding  \\
+ 8 & Utilization   & Card Utilization  \\
+ 9 & MarketRate   & Market Interest Rate  \\\hline
+\end{tabular}
+\label{intr1}
+\end{table}
+
+To build survival model, the dependent variable is the survival time $T$ and the censor indicator $D$. We build survival models for two event types separately, i.e., default ($m$=1) and attrition ($m$=2). Our objective is to predict the default and attrition risk at each month of $t,  t=1,2,...,21$. If accounts are default or attried during the performance period, the survival time $T < 21$. On the other hand, if they are still open, the survival time is $T=21$, which is censored.
+
+Before we start the survival modeling, we need check the collinearity in the data, which could bring bias into the parameter estimation. We run a simple linear regression using the survival time as the dependent variable (note that the selection of dependent variable does not impact the result of collinearity analysis). The result shows that the Variation Inflation Factor(VIF) values for all covariates are less than 10, thus, there are no significant collinearity in the data. 
+%The Variation Inflation Factor (VIF) is reported in table $\ref{Description_VIF}$ in Appendix. 
+
+\subsection{Statistical Estimation}
+
+Using the above mentioned dataset and SAS software, we build the SMLRS and CPH model for default and attrition separately. The SMLRS model is built using the Logistic procedure in SAS and CPH model is built using PHREG procedure in SAS. In this section, we compare the SMLRS model with the benchmark CPH model from the model's explanatory perspective. The statistical estimates of default model are reported in table \ref{default}, and table \ref{Attrition} provides parameter estimates for attrition model. 
+
+\subsubsection{Default Survival Model \\} 
+
+To fit the SMLRS default model, similar to that in \citet{Hastie2001}, we first select explicit points as the knots based on the empirical hazard function. There are 6 knots, i.e., $t$=3, 6, 7, 9, 10, 17, which are selected to construct the cubic spline function. All of the knots are the switching points of the nonlinear default hazard function. Thus, the spline has 7 segments. Moreover, we observe obvious default spikes at time $t$=7, 9, 11. To fit these spikes, we create three dummy variables, i.e., SPK(7), SPK(9) and SPK(11). Finally, we use the stepwise selection to select the significant variables and spline terms, and build the final Logistic regression model. Among the covariates, the spline segments and spike indicators are significant, and the $C$ statistics for in the final SMLRS default model is 0.854 (Note that the higher value of $C$ statistics, the better model fit, see \citet{Hosmer2013}).  
+
+\begin{table}[!h]
+\centering
+\caption{Parameter Estimation for Default Model}
+\begin{tabular}{|l||rr||rrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+																		  &  \multicolumn{2}{c||} { SMLRS Model }	&  \multicolumn{3}{c|} {CPH Model } 	\\ \hline
+ Parameter    								  & Estimate  & ProbChiSq & Estimate &ProbChiSq & HazardRatio  \\  \hline
+ Intercept    									  &	-36.4247	 &	$<$.0001	&						 &	 				& \\
+ Purchase\_APR 					  &    0.0085  &      0.0233 &  0.0094  &    0.0063  &   1.009 \\
+ Cash\_APR 		 							&    0.3558  &  $<$.0001 &  0.3006  &  $<$.0001 &   1.351 \\
+ Credit\_line 										&   -0.0978  &  $<$.0001 & -0.0982  & $<$.0001  &   0.906 \\
+ Pbad      											  &    3.2708  &  $<$.0001  & 3.1546  & $<$.0001 &  23.444 \\
+ Cash\_balance 							&    0.0640  &  $<$.0001 &  0.0289  &    0.0439   &   1.029 \\
+ Dq\_prior 											&    0.5469  &  $<$.0001 &  0.4435  & $<$.0001  &   1.558 \\
+ Outstanding  									&    0.1121  &  $<$.0001 &  0.1100  & $<$.0001  &   1.116 \\
+ Utilization  										&    0.3075  &  $<$.0001 &  0.2394  & $<$.0001  &   1.270 \\  
+ Marketrate  									&    1.3729  &  $<$.0001 &  1.2514  & $<$.0001  &   3.495 \\  
+ Marketrate*Cash\_APR &  -0.0570  &  $<$.0001  & -0.0478  &$<$.0001  &   0.953\\  
+ CSB($t$,3)   									& 	 0.1592	 & 	$<$.0001 & 		   &   		& \\
+ CSB($t$,6)   									& 	-0.6837	 & 	$<$.0001  & 	 	 &  		& \\
+ CSB($t$,7)   									& 	 0.7139	 & 	$<$.0001  & 	   &  		& \\
+ CSB($t$,9)   									& 	-0.2614	 & 	$<$.0001  & 	   & 			& \\
+ CSB($t$,10)  									& 	 0.0705	 & 	   0.0037  & 		   &   		& \\
+ CSB($t$,17)  									& 	 0.0016	 & 	$<$.0001	& 	   &   		& \\
+ SPK(7)     											& 	 0.2771	 & 	$<$.0001	& 	   &   		& \\
+ SPK(9)     											& 	-1.3064	 & 	$<$.0001	& 	   &  		& \\
+ SPK(11)    										& 	 0.1376	 & 	    0.0038	& 		 & 		  & \\\hline
+\end{tabular}
+\label{default}
+\end{table}
+
+From table \ref{default},  we see all covariates are significant for both CPH model and SMLRS model. Moreover, the parameter estimation results are very similar in both SMLRS model and CPH model, i.e., the estimations of two models have the same sign and similar values. For product related variables, both the purchase rate and cash rate have positive effects on the default risk, whereas, the credit line has negative effect on the default risk. The higher rate increases the payment burden of customers, which leads to the higher risk. According to the hazard ratio of CPH model, the cash rate has a bigger impact than the purchase rate. On the other hand, if the customers have larger credit line, which indicates they are creditworthy, thus, their default risk is often lower. Second, on customers' behavior related variables, all of the variables have positive effects. Thus, the higher cash balance, outstanding and credit utilization, the higher credit risk, because the customers with high balance and utilization are often accumulating balance before they are default. Moreover, the delinquent history and risk behavior score Pbad also has significant positive impact on the default risk. For example, according to the estimated hazard ratio, the default risk increases 23.62\% when we increase 0.01 unit for Pbad value. Third, the time-dependent macroeconomic variable market rate and its interaction with cash rate are also significant. Specifically, the market rate has positive effect on the default risk, i.e., the default risk increases with interest rate. Moreover, according to the hazard ratio of CPH model, the market rate has the second biggest impact on the default risk. Finally, for spline terms and spike dummy variables,  the positive estimates shows that the spline function is increasing with time or the default rate reaches the local maximum rate at the spiky point, and vice versa. 
+
+\subsubsection{Attrition Survival Model \\} 
+
+We use the same approach as that in SMLRS default model to fit the SMLRS attrition model. We select 4 knots at times $t$=4, 6, 9, 11 to construct the cubic spline function, and the resulted spline function has 5 segments. Moreover, we create three dummy variables to model the attrition spikes at time $t$=4, 9, 19. Again, stepwise selection is used for variable selection. Only 7 covariates are significant, but both the spline segments and spike indicators are significant. The $C$ statistics for the final SMLRS attrition model is 0.686. Compared with the default survival model, the attrition model is more difficult to build because the attrition event rate is much lower than the default event rate. Therefore, the model fit $C$ statistics of attrition is lower than that in default model.
+
+\begin{table}[!h]
+\centering
+\caption{Parameter Estimation for Attrition Model}
+\begin{tabular}{|l||rr||rrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+																		  &  \multicolumn{2}{c||} { SMLRS Model }	&  \multicolumn{3}{c|} {CPH Model } 	\\ \hline
+ Parameter    								  & Estimate  & ProbChiSq & Estimate &ProbChiSq & HazardRatio  \\  \hline
+ Intercept    									  &	-15.6183	 &	$<$.0001	&						 &	 				& \\
+ Purchase\_APR 					  &    0.0175  &      0.0015 &  0.0183  &    0.0008  & 1.018 \\
+ Credit\_line 										&   -0.0513  &  $<$.0001 & -0.0518  & $<$.0001 &  0.950 \\
+ Pbad      											  &   -1.3274  &  $<$.0001  &-1.3063  & $<$.0001 & 0.271 \\
+ Cash\_balance 							&   -0.1212  &      0.0530 & -0.1173  &    0.0595  & 0.889 \\
+ Dq\_prior 											&    0.5078  &  $<$.0001 &  0.5025  & $<$.0001  & 1.653 \\
+ Utilization  										&   -1.4459  &  $<$.0001 & -1.4533  & $<$.0001  & 0.234 \\  
+ Marketrate  									&   -0.3052  &      0.0515 & -1.0936  &    0.0004  & 0.335 \\  
+ CSB($t$,4)   									& 	 0.1218	 & 	$<$.0001 & 		   &   		& \\
+ CSB($t$,6)   									& 	-0.1591	 & 	$<$.0001  & 	 	 &  		& \\
+ CSB($t$,9)   									& 	 0.0491	 & 	$<$.0001  & 	   &  		& \\
+ CSB($t$,11)   								& 	-0.0119	 & 	$<$.0001  & 	   & 			& \\
+ SPK(4)     											& 	 0.2444	 & 	    0.0022	& 	   &   		& \\
+ SPK(9)     											& 	-0.3834	 & 	    0.0032	& 	   &  		& \\
+ SPK(19)    										& 	-0.2770	 & 	    0.0316	& 		 & 		  & \\\hline
+\end{tabular}
+\label{Attrition}
+\end{table}
+
+For the attrition survival models, from the estimation results in table \ref{Attrition}, we also see the sign of all covariates are consistent and the parameter estimates are very similar across two models. However, we only see 7 covariates are significant, which is less than that in default models. There are two product related variables that are significant. Specifically, the purchase rate has positive effect, but the credit line has negative effect. In other words, if the product has higher purchase rate, the customers are more likely to close the accounts. But, if the lenders give higher credit line to the customers, they are more likely to keep and use the card. In credit card industry,  many lenders dynamically adjust the account's rate and credit line according to customers' past behavior. Our results show that larger credit line can increase customers' loyalty, but the higher rate drives the attrition rate. Furthermore, we see the cash APR is not a significant factor on the attrition behavior because most customers often do not use the cash bucket. Second, we observe the outstanding is not significant anymore, but the utilization and cash balance have significant negative effects on attrition. The more the customer use the card, the less chance she will close the account. On the other hand, the behavior score variable Pbad also has negative effect because it is difficult for the customer with higher risk to obtain additional credit card account from other lenders. However, the delinquent behavior has positive effects: if the customer is in delinquent status, it is very likely the customer will close the account. One possible interpretation is that many lenders have risk based pricing program, i.e., the lenders increase the account's rate if the customer is in delinquent status. As a result, the increased rate drives the attrition rate. Third, the time-dependent market rate has negative effect. The implication is that when the market rate is increasing, the customer is more likely to keep and use account, which is consistent with our intuition. Finally, the spline terms and spike dummy variables are both significant, which shows that the hazard function is nonlinear and spiky.
+
+In summary, from the results in tables \ref{default} and \ref{Attrition}, except for the spline terms, we see that the parameter estimates of covariates in  SMLRS model are very similar as those in CPH model. Specifically, the significant variables in the two models are the same, and the sign of estimation for all variables are the same. Moreover, there are no significant differences in the value of parameter estimates. Therefore, in terms of explanatory power, the SMLRS model performs as well as the CPH model.
+
+\subsection{Prediction Performance Comparison}
+
+Except for the SMLRS model's explanatory power, we also assess the SMLRS model's predictive power by validating their prediction performance on validation sample. To obtain robust conclusion, in this section, we compare the two set of survival models from two perspectives: 1) prediction and classification performance; 2) cost based performance for default model.    
+Specifically, we first score the validation sample using the SMLRS model and CPH model, then we compare their performance from the above two perspectives.
+
+\subsubsection{Prediction Performance \\}
+
+We first compare the prediction performance of two sets of survival models using the well-known receiver operating characteristic curve (ROC) and analyzing the area under that curve (AUC), 
+see \citet{Bradley1997}. The ROC curve plots the true positives, i.e. , the default accounts are classified as default, versus the false positives, i.e. the non-default accounts are classified as default, when the discrimination threshold is varied. Moreover, when the AUC close to 1.0 implies that the model has perfect discrimination, while an AUC close to 0.5 suggests poor discrimination. 
+
+\begin{figure}[!h]
+\begin{center}
+  \vspace{-1.7cm}\hspace*{-1.8cm}{\psfig{figure = Roc_Curves1.prn, width = 14cm, angle = 270}}
+  \vspace{-2.6cm}
+%  \parbox[t]{0.78\linewidth}{\scriptsize Note: For test only}
+\end{center}
+\caption{Predition \& Actual for SMLRS and CPH Models.}\label{ModelCurveFig}
+\end{figure}
+%we plot the prediction \& actual for four models. For reasons of commercial confidentiality, we do not report the actual default rate and attrition rate on the graph. For default models, we see both Cox model and LRH model fit the data well. However, for attrition models, the LRH model clearly outperforms the Cox model.  
+%\subsubsection{Classification Performance \\} We use the predicted event probability of 12 month to make the comparison. 
+In Figure \ref{ModelCurveFig}, the upper graph provides the ROC curves for both default survival models and attrition survival models, the bottom table calculates the AUC values for both benchmark CPH models and SMLRS models. Specifically, for default models, SMLRS model performs as well as CPH model, the difference is only 0.4\%. However, for attrition models, the SMLRS model outperforms the CPH model by 2.76\%.  
+
+Furthermore, we also validate the model's prediction accuracy performance from classification perspective. We use the same approach as that in \citet{Stepanova2002}. First, we sort the validation sample according to the predicted default (or attrition) probability. Then, we decide the cut-off points for both the CPH model and the SMLRS model so that the number of predicted bads equals actual number of bads in the  sample, i.e., 2417 accounts default in the first year, so the 2417 accounts with the highest probability of default in the first year under CPH model are predicted to be bad. Finally, the numbers of bads and goods correctly classified by the models in the validation sample are compared in tables \ref{Default_Performance} and \ref{Attrition_Performance}. Notice that the column "AG and PG" represents the accounts that are actual goods and are predicted as goods, the column "AB and PB" represents the accounts that are actual bads and are predicted as bads, the column "AG and PB" represents the accounts that are actual goods and are predicted as bads, and the column "AB and PG" represents the accounts that are actual bads and are predicted as goods, respectively.
+
+\begin{table}[!h]
+\centering
+\caption{Prediction Performance Comparison for Default Model}
+\begin{tabular}{|l|l|rrrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+  Horizon &   Model     & AG and PG & AG but PB & AB but PG	& AB and PB \\ \hline
+					& Actual Nos  & 	6804        & 	 		    & 			    & 2417 \\
+12 Months & SMLRS Model   & 	5992			  & 812		      &   812   & 1605 \\
+					&  CPH Model  & 	5984			  & 820		      &   820	  & 1597 \\ \hline
+					& Actual Nos  & 5514        & 	 		 		  & 		  & 518 \\
+18 Months & SMLRS Model   & 5111			  & 403		      &   403   & 115\\
+				         & CPH Model   & 5112			  & 402		      &   402	  & 116\\ \hline
+\end{tabular}
+\label{Default_Performance}
+\end{table}
+
+In table \ref{Default_Performance}, we compare the two default models' prediction performance on both 12 months and 18 months horizon. For 12-month time window, we see SMLRS model outperforms the CPH model, especially for bad accounts, the accuracy increases by 0.7\%. As we will discuss in the next section, it has big impact from the economic perspective. As we increase the time window to 18 months, the prediction accuracy of two models are very close. Similarly, we also compare two attrition models' prediction performance for two different time horizons, the results of which are in table \ref{Default_Performance}. We still see SMLRS model performs better than CPH model in both 12-month and 18-month time window. Especially, the improvement is bigger in 18-month time window.  
+
+\begin{table}[!h]
+\centering
+\caption{Prediction Performance Comparison for Attrition Model}
+\begin{tabular}{|l|l|rrrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+  Horizon  &   Model     			& AG and PG & AG but PB & AB but PG	& AB and PB \\ \hline
+							& Actual Nos  			& 8449       & 	 			    & 			    & 772 \\
+12 Months  & SMLRS Model & 7980			  & 	469	    &  469    & 303 \\
+						  & CPH Model & 7978			  & 	471	    &  471 	  & 301 \\ \hline
+						& Actual Nos  				& 5805	      & 	 		   		 & 				  & 227 \\
+18  Months & SMLRS Model  & 5597			  & 	208     &  208    & 19 \\
+						&  CPH Model  & 5589		    & 	216     &  216	  & 11 \\ \hline
+\end{tabular}
+\label{Attrition_Performance}
+\end{table}
+
+In summary, compared with CPH model, our empirical results show that the SMLRS model can improve the classification accuracy, especially for low event rate attrition model. The flexibility of spline provides the capability to fit the highly irregular hazard function, which appears when the sample size is smaller or event rate is lower.  
+
+\subsubsection{Cost Based Performance \\}
+
+In practice, as pointed by \citet{Bellotti2009}, there exists large imbalance between good and bad cases, especially for super-prime markets. In this scenario, from statistical modeling perspective, it is much easier to build a model with poor discrimination power. On the other hand, for a financial company, we know the relative cost to accept a bad case is much higher than to reject a good case. Therefore, there is a need to assess the model's performance from cost perspective, especially for the default model, because it could incur bigger loss for the firm if the model does not perform as expected. Therefore, in this section, we use same approach as that in \citet{Bellotti2009} to compare two default models' performance from the cost perspective. 
+
+\begin{table}[!h]
+\centering
+\caption{Cost Based Performance Comparison for Default Model}
+\begin{tabular}{|l|rr|rr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+Cost Ratio	    	&  \multicolumn{2}{c|} {Cut-off from training data}	&  \multicolumn{2}{c|} {Cut-off from validation data} 	\\ \hline
+$C_{FP}$/$C_{FN}$	& CPH Model & SMLRS Model & CPH Model	& SMLRS Model \\ \hline
+15   			  & 	0.7471  & 	0.7359	&  0.7459   & 	0.7247	  		\\
+20 				  & 	0.9302  & 	0.8921	&  0.8959	  & 	0.8540			  \\ 
+25  				& 	0.9239  & 	0.9308  &  0.9015	  & 	0.8764				\\ \hline
+\end{tabular}
+\label{Cost_Based_Performance_Comparison}
+\end{table}
+
+We assume the correctly classified case has a cost of 0; 2) if a good case is wrongly predicted as bad, it incurs a cost of $C_{FN}$; 2) if a bad case is is wrongly predicted as good, it incurs a cost of $C_{FP}$. We generate the cut-off threshold according to the cost function as following: \bean
+Cost(P)=C_{FP}*I\{P \le P_c\}*I\{m=1\}+C_{FN}*I\{P \ge P_c\}*I\{m\neq1\}
+\eean where $P$ is the predicted default probability, $P_c$ is the cut-off threshold of default probability, and $I\{\cdot\}$ is an indication function. We find the cut-off point by minimizing the total cost of errors. As that in \citet{Bellotti2009},  we assume the cost of rejecting a good case is 1, i.e., $C_{FN}$=1, we report our results on three different cost ratios so that we can have robust conclusions. Moreover, to remove the bias for selecting cut-off point, we report our results for both selecting cut-off from training sample and selecting cut-off from validation sample. In table \ref{Cost_Based_Performance_Comparison}, our empirical results show the SMLRS model outperforms CPH model for both cost ratios and cut-off selection methods, and the average cost saving on validation sample is  3.569\%. Therefore, the SMLRS model can bring significant economic values for consumer lenders by providing more accurate risk predictions.
+
+\section{Summary and Future Research}\label{sec:conclusion}
+
+In this paper, we introduce a regression spline based survival modeling method. It can deal with competing risks and easily treat many time-dependent covariates. More importantly, by incorporating the regression spline into the multinomial logistic regression, it can model irregular, nonlinear and spiky shapes of the hazards. We compare it's performance with the classical Cox (CPH) model. Our results show that the model performs as well as CPH model from statistical explanatory perspective, and it also outperforms the CPH model on the prediction accuracy for both default model and attrition model. The improvement is more evident in attrition model which has low event rate. Moreover, we have conducted cost based performance comparison for default model, the results further verify that the spline based survival model outperforms the CPH model.
+
+From a practical perspective, in consumer lending industry, the performance data is monthly data, and the regression spline based multinomial logistic regression model can deal with the discrete survival time, time-dependent covariates and competing risks. Thus, it can be used for credit risk and profit scoring to predict the risk of default and attrition. Moreover, it has the following main advantages: 1) the logistic regression and regression spline is easier to learn and code, thus it is easier to implement; 2) it is easier to treat many time-dependent covariates; 3) the simple parametric form is especially better than Cox (CPH) model for predictive scoring. Therefore, we believe the regression spline based survival modeling approach has substantial potential to improve the credit scoring practice. 
+
+For future research, it is valuable to further explore the applications of the spline based survival model to different consumer credit products, i.e., auto loan, mortgage, and microloan. On the other hand, it is also interesting to investigate how much additional economic value the proposed method can bring when it is used for profit scoring and credit decisions.  
+
+\section{Acknowledgement:}
+The authors thank the editor of the special issue, Jonathan Crook, and two reviewers for their constructive comments. Sirong Luo is supported by Shanghai Pujiang Program (12PJC051) and in part by National Natural Science Foundation of China (NSFC-71471107).
+
+\section{Appendix: Regression Spline Function}\label{sec:Splines}
+
+A spline function is defined as a piecewise polynomial, the polynomials with degree $d$ join in the knots ($t_i; i=1,2...,k$) satisfying the continuity conditions for the function itself and its first $d-1$ derivatives. Most commonly, $d$ equals to three, see \citet{Wold1974}. Using the convenient "+" function representation in \citet{Smith1967},  the general form of a spline with $d-$degree polynomial pieces and $k$ knots $t_1$,...,$t_k$ can be written as: \bea
+S(t) = \sum_{j=0}^{d}\beta_{0j}t^{j}+\sum_{i=1}^{k}\sum_{j=0}^{d}\beta_{ij}(t-t_{i})_{+}^{j}
+\label{eq:QSpline}
+\eea
+where $(t-t_{i})_{+}^{j}=(t-t_{i})^{j} \textbf{I} (t>t_{i})$ and $I\{\cdot\}$ is an indication function. Assume we have a commonly used cubic (i.e., $d=3$) spline $S(t)$ with 3 knots (i.e., $k=3$) and no constraints, according to \citet{Smith1967}, the spline function can be written as: \bea
+S(t) & = & \beta_{00} + \beta_{01} t + \beta_{02}  t^2 + \beta_{03}  t^3 \nn
+     & + & \beta_{10} (t - t_1)_+^0 + \beta_{11} (t - t_1)_+^1 + \beta_{12} (t - t_1)_+^2 + \beta_{13} (t - t_1)_+^3 \nn
+     & + & \beta_{20} (t - t_2)_+^0 + \beta_{21} (t - t_2)_+^1 + \beta_{22} (t - t_2)_+^2 + \beta_{23} (t - t_2)_+^3 \nn
+     & + & \beta_{30} (t - t_3)_+^0 + \beta_{31} (t - t_3)_+^1 + \beta_{32} (t - t_3)_+^2 + \beta_{33} (t - t_3)_+^3
+\label{eq:Spline}
+\eea
+
+According to \citet{Wold1974}, the spline must satisfy the continuity conditions. Thus, we constrain the spline function $S(t)$ to be continuous at the knots, we can cancel the constant terms $\beta_{10} (t - t_1)_+^0$, $\beta_{20} (t - t_2)_+^0$, and $\beta_{30} (t - t_3)_+^0$. Moreover, we constrain the 1st derivative of $S(t)$ to be continuous at the knots, we cancel the first order terms $\beta_{11} (t - t_1)_+^1$, $\beta_{21} (t - t_2)_+^1$, and $\beta_{31} (t - t_3)_+^1$. Finally, we constrain the 2nd derivative of $S(t)$ to be continuous at the knots, we cancel the second order terms $\beta_{12} (t - t_1)_+^2$, $\beta_{22} (t - t_2)_+^2$, and $\beta_{32} (t - t_3)_+^2$. Therefore, we can write the spline model as:
+\bea
+S(t) & = & \beta_{00} + \beta_{01} t + \beta_{02} t^2 + \beta_{03} t^3 \nn
+     & + & \beta_{13} (t - t_1)_+^3 +  \beta_{23} (t - t_2)_+^3 + \beta_{33} (t - t_3)_+^3
+\label{eq:ReducedSpline}
+\eea
+
+As discussed before, the hazard of a loan porfolio becomes stable as time goes by,  therefore, we can assume the last segment of the smooth cubic spline is constant, then, we can add the following constraints:
+\bea
+  \beta_{03} + \beta_{13}  + \beta_{23} + \beta_{33} & =0 \nn
+  \beta_{02} - 3\beta_{13}t_1  - 3\beta_{23}t_2 - 3\beta_{33}t_3 & =0 \nn
+  \beta_{01} + 3\beta_{13}t_1^2  + 3\beta_{23}t_2^2 + 3\beta_{33}t_3^2 & =0
+\label{eq:LastSegmentConstraints}
+\eea
+The first equation constraints the coefficient of cubic term in last segment is zero, the second equation constraints the coefficient of quadratic term in last segment is zero, and the last equation constraints the coefficient of linear term in last segment is zero. With these constraints, we can write the spline function $S(t)$ as:
+\bea
+S(t) & = & \beta_{00}  \nn
+     & + & \beta_{13}\left( (t-t_1)_+^3 - t^3 + 3t_1t^2 - 3t_1^2t \right) \nn
+     & + & \beta_{23}\left( (t-t_2)_+^3 - t^3 + 3t_2t^2 - 3t_2^2t \right) \nn
+     & + & \beta_{33}\left( (t-t_3)_+^3 - t^3 + 3t_3t^2 - 3t_3^2t \right)
+\label{eq:FinalSpline}
+\eea
+Therefore, for a given event type $m$, the parameters $\vec{\beta}_m$ in spline function $S(t,\vec{\beta}_m)$ is $\vec{\beta}_m=\{ \beta_{00}, \beta_{13}, \beta_{23}, \beta_{33} \}$. 
+
+Note that if the empirical hazard function has a trend, we can modify those constraints in equations (\ref{eq:LastSegmentConstraints}) to make the spline function fit the data. For example, the hazard function has a linear trend, we can remove the third constraint in equations (\ref{eq:LastSegmentConstraints}), the final spline function is :
+\bea
+S(t) & = & \beta_{00} + \beta_{01} t \nn
+     & + & \beta_{13}\left( (t-t_1)_+^3 - t^3 + 3t_1t^2  \right) \nn
+     & + & \beta_{23}\left( (t-t_2)_+^3 - t^3 + 3t_2t^2  \right) \nn
+     & + & \beta_{33}\left( (t-t_3)_+^3 - t^3 + 3t_3t^2  \right)
+\label{eq:FinalSplineLinear}
+\eea
+Clearly, this example further shows that the flexible spline function can model different shapes of hazard function.
+%\section*{Acknowledgment}
+
+%This work was sponsored by Shanghai Pujiang Program (12PJC051) and was supported in part by National Natural Science Foundation of China (NSFC-71271128) for Sirong Luo. This support is gratefully acknowledged.
+
+\bibliographystyle{ormsv080}
+\newpage
+\bibliography{CM1129}
+
+\end{document}
+
+\subsubsection{Model Diagnosis}\label{sec:ModelDiagnosis} 
+
+As a standard part of modeling process, we need check the model fit after we build the survival model. One major approach is to study the residual, which is some measures of difference between predicted value and actual value. If the model fits the data well, the residual should not show any unexpected pattern. However, the residual analysis for survival models is relatively more complex because of the censored data. We use the following classical residual analysis. The Cox-Snell residuals in \citet{CoxSnell1968} is defined as follows: \bea
+r_i=exp(\hat{\beta}\vec{x}_i(t_i))\hat{H_0}(t_i)=\hat{H_i}(t_i)=-\log \hat{S_i}(t_i),
+\eea where $\hat{H_0}(t_i)$ is the predicted baseline hazard, $\hat{H_i}(t_i)$ is the estimated hazard of the $i$th loan at time $t_i$ $\hat{S_i}(t_i)$ is the estimated survival function of the $i$th loan at time $t_i$. According to \citet{Collett1994}, the $r_i$ has exponential distribution with mean 1. We can plot $\log(-\log \hat{S_i}(t_i))$ with respect to $\log r_i$, it should be a straight line passing point ($0,0$) and with slope 1. A transformation of Cox-Snell residual is the Martingale residual (see \citet{Therneau1990}) defined as follows: \bea
+\tilde{r}_i=\delta_i-r_i
+\eea where $\tilde{r}_i$ is the difference between observed ($\delta_i$) and expected ($r_i$) events at time interval $(0,t_i)$. We can plot $\tilde{r}_i$ with respect to the order of survival time, it should not show any pattern for a well fitted model. A further transformation of Martingale residual is the Deviance residual, it is defined in \citet{Therneau1990} as follows: \bea
+\hat{r}_i=sgn(\tilde{r}_i)[-2\{\tilde{r}_i+\delta_i\log(\delta_i-\tilde{r}_i)\}]
+\eea The $\hat{r}_i$ is symmetrically distributed around zero and has an approximated standard deviation of 1. Note that for these three residuals, Martingale residuals are obtained by transforming Cox-Snell residuals, and Deviance residuals are a further transformation of martingale residuals. \citet{Allison1995} points out that for most purposes, we can ignore the Cox-Snell and martingale residuals as they are not very informative. The deviance residuals behave like the residuals from OLS regression, thus, it is better to interpret. In our numerical study, we will use the Deviance residual to assess the fit of CPH model. 
+
+\subsubsection{Model Diagnosis} 
+
+\begin{figure}[!h]
+\begin{center}
+  \vspace{-2.0cm}\hspace*{-1.8cm}{\psfig{figure = Default.prn, width = 14cm, angle = 270}}
+  \vspace{-1.2cm}
+%  \parbox[t]{0.78\linewidth}{\scriptsize Note: For test only}
+\end{center}
+\caption{Deviance Residuals for Default Model.}\label{defaultFig}
+\end{figure}
+
+As we discussed in section \ref{sec:ModelDiagnosis}, we validate the model fit by checking the residuals. Specifically, we plot the deviance residuals for two CPH models. In Figure \ref{defaultFig}, deviance residuals of default model are plotted against four selected covariates: purchase APR, credit line, outstanding and utilization. There are no unusual patterns in the residuals. In Figure \ref{AttritionFig}, deviance residuals of attrition model are also plotted against four selected covariates: purchase APR, credit line, Pbad and utilization. For both covariates, we observe the residuals appear in two groups, one representing uncensored observations and another representing censored ones. The more widely dispersed points in the upper portion of the figure are the uncensored observations. As pointed out by \citet{Allison1995}, this patterns is because of censoring, but it does not necessarily imply the model has problem. For example, we know the higher utilization is associated with longer attrition time. However, all censored observations are censored at fixed time, as the utilization increases, the survival to the censored time is more consistent with the predictions. Thus, we see the residuals are rising with utilization in the censored groups.
+
+\begin{figure}[!h]
+\begin{center}
+  \vspace{-1.9cm}\hspace*{-1.8cm}{\psfig{figure = Attrition.prn, width = 14cm, angle = 270}}
+  \vspace{-1.5cm}
+%  \parbox[t]{0.78\linewidth}{\scriptsize Note: For test only}
+\end{center}
+\caption{Deviance Residuals for Attrition Model.}\label{AttritionFig}
+\end{figure}
+
+
+\subsubsection{模型验证}
+根据样本数据得到模型估计后，要对其拟合程度即模型的好坏进行检验。首先对\textbf{残差}进行检验，包括Deviance 残差和Schoenfeld 残差。本文中我们不考虑Cox-Snell及Martingale 残差，因为对于采用偏似然法估计参数的Cox模型，这两个残差值所含的信息量并不是很大。
+
+对于客户流失与违约事件的Cox比例风险模型，其Deviance残差图分别如下图\ref{res1}、图\ref{res2}所示。
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{deviance_attr.png}
+ \caption{Deviance残差图}
+\label{res1}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{deviance_d.png}
+ \caption{Deviance残差图}
+\label{res2}
+\end{figure}
+
+Deviance 残差和OLS 回归的残差很相似，理论上，它应该近似服从均值为0，方差为1 的对称分布。对于那些具有比期望值大的生存时间的观测，其Deviance 残差为负数，相反，生存时间比期望值小的观测具有正的Deviance 残差。Deviance 残差值过大或者过小都说明这个观测可能是异常值，需要特殊处理。我们可以画出Deviance残差与任意一个解释变量的散点图，如果其呈现出任何不正常的规律都说明数据中的一部分信息没有被模型拟合出来。值得注意的是，对于删失的那部分数据可能显现出异常的规律，但这不足以说明模型存在问题。
+
+显然，两个残差图并没有呈现出一定的规律性，基本关于0对称，且不存在过大或者过小的值，从而说明模型拟合效果良好。
+
+Schoenfeld残差定义为确实发生事件的观测值其真实的变量值与该变量期望值的差。理论上，Schoenfeld残差与生存时间独立，即Schoenfeld 残差图不应该显现出任何与时间的关系。因此，Schoenfeld 残差的两个重要功能就是可以检验某个变量是否需要变形，以及某个变量对生存时间的影响随时间的变化情况。
+
+对于客户流失事件的Cox 比例风险模型，自变量与生存时间$t$的Schoenfeld 残差图\ref{sres} 为：
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{a1.png}
+ \caption{客户流失模型Schoenfeld残差图}
+\label{sres}
+\end{figure}
+
+可以看到，信用额度水平与贷款拖欠次数的Schoenfeld残差没有反应出任何信息，它们的取值大小随时间基本保持不变。针对信贷资产及用卡率，Schoenfeld 残差大体上呈现出无规律性，随时间有稍许的波动。为了检验这两个变量残差与时间的真实关系，我们用OLS方法对它们的Schoenfeld 残差与时间进行回归分析，得到其系数在$\alpha=0.1$的情况下均不显著，所以我们认为Schoenfeld残差能够通过检验，各自变量对生存时间的影响不随时间发生显著变化，各自变量也不需要进行转化。
+
+客户违约Cox比例风险模型Schoenfeld残差图如下\ref{d1}、\ref{d2}，可以用同样的方法分析，我们发现各自变量均能通过检验。
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{d1.png}
+\caption{客户违约模型Schoenfeld残差图a}
+\label{d1}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{d2.png}
+ \caption{客户违约模型Schoenfeld残差图b}
+\label{d2}
+\end{figure}
+
+接下来，我们采用验证组的数据分别对两个模型的\textbf{准确度}进行检验。首先，我们计算出每个月真实发生违约和流失的客户比例，分别记为Act\_default、Act\_attrition，然后算出预测的违约概率和流失概率在每个月上的均值，分别记为Pred\_default、Pred\_attrition。 最后，画出真实值与预测值在时间$t$ 上的变化图。通过图形我们可以对预测值的准确性有一个直观地认识。对于不同的模型，得到的图形分别如图\ref{a}、图\ref{d} 所示。
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{attr_hold.png}
+ \caption{Cox客户流失模型真实值与预测值对比图}
+\label{a}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{def_hold.png}
+ \caption{Cox违约模型真实值与预测值对比图}
+\label{d}
+\end{figure}
+
+可以看到，两个模型在验证组数据上的拟合效果良好。对客户在未来每个时刻点上的违约概率和流失概率有较好的拟合效果，这也为后续的信贷决策提供了坚实的基础。
+
+\begin{table}[!h]
+\centering
+\caption{Prediction Performance Comparison for Default Model}
+\begin{tabular}{|l|rrrr|rrrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+	  		 	    &  \multicolumn{4}{c|} { 12 Months }	&  \multicolumn{4}{c|} {18 Months } 	\\ \hline
+ Model        & AG and PG  & AG but PB & AB but PG & AB and PB & AG and PG  & AG but PB & AB but PG & AB and PB\\  \hline
+ Actual Nos   & 				 & 				     & 		       &           &            & 				 & 				     & 		      \\
+ Cox Model    & 				 & 				     & 		       &           &            & 				 & 				     & 					\\
+ LRH Model    & 				 & 				     & 		       &           &            & 				 & 				     & 	 				\\\hline
+\end{tabular}
+\label{default_Performance}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{Prediction Performance Comparison for Attrition Model}
+\begin{tabular}{|l|rrrr|rrrr|} \hline
+% after \\: \hline or \cline{col1-col2} \cline{col3-col3} ...
+	  		 	    &  \multicolumn{4}{c|} { 12 Months }	&  \multicolumn{4}{c|} {18 Months } 	\\ \hline
+ Model        & AG and PG  & AG but PB & AB but PG & AB and PB & AG and PG  & AG but PB & AB but PG & AB and PB\\  \hline
+ Actual Nos   & 				 & 				     & 		       &           &            & 				 & 				     & 		      \\
+ Cox Model    & 				 & 				     & 		       &           &            & 				 & 				     & 					\\
+ LRH Model    & 				 & 				     & 		       &           &            & 				 & 				     & 	 				\\\hline
+\end{tabular}
+\label{Attrition_Performance}
+\end{table}
+
+%\bea
+%S(t) & = & \beta_{00} + \beta_{01} t + \beta_{02} t^2 + \beta_{03} t^3 \nn
+%     & + & \tout{\beta_{10} (t - t_1)_+^0} + \tout{\beta_{11} (t - t_1)_+^1}  + \tout{\beta_{12} (t - t_1)_+^2} + \beta_{13} (t - t_1)_+^3 \nn
+%     & + & \tout{\beta_{20} (t - t_2)_+^0} + \tout{\beta_{21} (t - t_2)_+^1}  + \tout{\beta_{22} (t - t_2)_+^2} + \beta_{23} (t - t_2)_+^3 \nn
+%     & + & \tout{\beta_{30} (t - t_3)_+^0} + \tout{\beta_{31} (t - t_3)_+^1}  + \tout{\beta_{32} (t - t_3)_+^2} + \beta_{33} (t - t_3)_+^3
+%\label{eq:Reduced_Spline}
+%\eea
+
+\begin{figure}[!h]
+\begin{center}
+  \vspace{-0.3cm}\hspace*{-4.8cm}{\psfig{figure = Cox_Default.eps, width = 12cm, angle = 270}}
+  \vspace{-5.8cm}
+
+  \parbox[t]{0.78\linewidth}{\scriptsize Note:
+$T = 1$, $c = 0.5$, $h =0.05$, $b = 0.64$,  $\mu(p) = 250 p^{-3}$, $\sigma(p) = 500 p^{-5}$, and $\epsilon\sim$ truncated $N(0,1)$.}
+\end{center}
+\caption{Deviance Residuals for Default Model.}\label{defaultFig}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+%\vspace{3.8in}
+ \includegraphics[scale=0.80]{Test.prn}
+\caption{\label{fig:demand_Price} Demand count by price.}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.65\textwidth]{Test.png}
+\caption{a}
+\label{d1}
+\end{figure}

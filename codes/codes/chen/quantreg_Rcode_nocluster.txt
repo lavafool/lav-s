@@ -1,0 +1,36 @@
+library(quantreg)
+train<-read.csv("C:/Users/Admin/Desktop/loan/DATASET/Loan_credit_rr_train.csv")
+hold<-read.csv("C:/Users/Admin/Desktop/loan/DATASET/Loan_credit_rr_hold.csv")
+x<-cbind(1,hold)
+quantreg<-rq(RR~
+               EmploymentStatus+
+               IsBorrowerHomeowner+
+               CurrentlyInGroup+
+               IncomeRange+
+               ProsperRating__numeric+
+               EmploymentStatusDuration_num+
+               CreditScoreRangeUpper_num+
+               CurrentCreditLines_num+
+               OpenRevolvingMonthlyPayment_num+
+               InquiriesLast6Months_num+
+               TotalInquiries_num+
+               CurrentDelinquencies_num+
+               AmountDelinquent_num+
+               DelinquenciesLast7Years_num+
+               PublicRecordsLast10Years_num+
+               PublicRecordsLast12Months_num+
+               BankcardUtilization_num+
+               TotalTrades_num+
+               TradesNeverDelinquentpercent_num+
+               TradesOpenedLast6Months_num+
+               DebtToIncomeRatio_num+
+               LoanOriginalAmount_num+
+               MonthlyLoanPayment_num+
+               Recommendations_num+
+               InvestmentFromFriendsCount_num+
+               InvestmentFromFriendsAmount_num+
+               Investors_num+
+               firstcreditline_y,data=train,tau=seq(.01,.99,.01)
+)
+pre_hold<-predict(quantreg,newdata=x)
+write.csv(pre_hold,'C:/Users/Admin/Desktop/loan/DATASET/pre_hold.csv')
